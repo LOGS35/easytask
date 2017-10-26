@@ -1,0 +1,71 @@
+.alert {
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    position: fixed;
+    z-index: 999;
+    min-width: 15%;
+    /* min-height: 10vh; */
+    /* text-align: center; */
+    /* vertical-align: middle; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: center; */
+    /* text-align: center; */
+    bottom: 10px;
+    right: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+a.dropdown-item.small {
+    cursor: pointer;
+}
+
+.content-wrapper {
+    padding-top: 5rem;
+}
+
+.login {
+    /* height: 100%; */
+    background-color: #343a40!important;
+    min-height: calc(100vh - 0px);
+    padding-top: 12em;
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: center; */
+}
+
+.login.register {
+    padding-top: 10em;
+}
+
+.dropdown-menu i.fa {
+    margin-right: 5px;
+}
+
+.card-header i.fa.fa-pencil.btn.btn-primary {
+    padding: 5px;
+    float: right;
+    color: #fff;
+    cursor: pointer;
+}
+
+.password-confirm, .button-submit {
+    display: none;
+}
+
+.mb-3-equip {
+    margin-bottom: 6rem;
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+.alert span strong {
+    display: block;
+    text-align: left;
+    font-weight: 500;
+}
