@@ -61,7 +61,12 @@
                          @endif
                       </td>
                       <td>{{ $equipo->created_at }}</td>
-                      <td>holo</td>
+                      <td>
+                         @if ($equipo->estado == "Activo")
+                          <a href="{{ route('equip.destroy', $equipo->id) }}" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                         @endif 
+                         <a href="{{ route('equip.show', $equipo->id) }}" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                      </td>
                     </tr>
                 @endforeach
               </tbody>
@@ -89,14 +94,14 @@
         {!! Form::open(['route' => 'equip.store', 'method' => 'POST']) !!}
         <div class="form-group">
             <div class="form-row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                {!! Form::label('nombre', 'Nombre') !!}
                {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre', 'required']) !!}
               </div>
-              <div class="col-md-6">
+              <!--<div class="col-md-6">
                {!! Form::label('estado', 'Estado') !!}
                {!! Form::select('estado', ['' => 'Seleccione', 'Activo' => 'Activo', 'Inactivo' => 'Inactivo'], null, ['class' => 'form-control']) !!}
-              </div>
+              </div>-->
             </div>
         </div>
         <div class="form-group">

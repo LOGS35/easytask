@@ -44,6 +44,10 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('equip','EquipController');
+    Route::get('equip/{id}/destroy', [
+        'uses' => 'EquipController@destroy',
+        'as' => 'equip.destroy'
+    ]);
 });
 
 Route::group(['middleware' => 'auth'], function(){

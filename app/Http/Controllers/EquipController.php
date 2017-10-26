@@ -8,6 +8,7 @@ use App\User;
 use App\Equipo;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+//use App\Http\Controllers\Flash;
 
 class EquipController extends Controller
 {
@@ -53,7 +54,6 @@ class EquipController extends Controller
     {
         $v = Validator::make($request->all(), [
             'nombre' => 'required|string|max:20',
-            'estado' => 'required|string|max:20',
         ]);
  
         if ($v->fails())
@@ -62,6 +62,7 @@ class EquipController extends Controller
         }
         
         $equipo = new Equipo($request->all());
+        $equipo->estado = "Activo";
         //dd($equipo);
         $equipo->save(); 
         
@@ -134,6 +135,39 @@ class EquipController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //$user = User::find($id->id);
+        //$user->delete();
+        
+        //$count = 0;
+        $user_id = DB::table('users')
+            ->where('id_equip',$id)
+            ->get(); 
+        
+        
+        foreach ($user_id as $user_id) {
+            $user = User::find($user_id->id);
+        //dd($user->id_equip);
+            //dd($user);
+            $user->id_equip = null;
+            $user->save();
+        }
+        
+        $equipo = Equipo::find($id);
+        $equipo->estado = 'Inactivo';
+        $equipo->save();
+        //foreach($user_id as $User) {
+            //$user = User::find($user_id);
+            /*$user->id_equip = null;
+            $user->save();*/
+            //$count = $count + 1;
+            //dd($user_id);
+            //dd($count);
+        //}
+        //$user->id_equip = null;
+        //$user->save();
+        //App:abort(404);
+        //dd($user);
+        //dd($user);
+        return back()->with('status', 'El equipo "'. $equipo->nombre .'" a pasado a modo inactivo y los integrantes han pasado a estar sin equipo!');
     }
 }

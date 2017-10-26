@@ -10,17 +10,17 @@
 
     <title>{{ config('app.name', 'EasyTask') }}</title>
     <!-- Bootstrap core CSS-->
-    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <!-- Page level plugin CSS-->
-    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/sb-admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
     <!-- Tags -->
-    <link href="{{ asset('tags/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/tags/select2.min.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <!--<link href="{} asset('css/app.css') {}" rel="stylesheet">-->
@@ -225,25 +225,25 @@
   </div>
    @endif
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('public/js/app.js') }}"></script>
+    <script src="{{ asset('public/js/script.js') }}"></script>
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/popper/popper.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/vendor/popper/popper.min.js') }}"></script>
+    <script src="{{ asset('public/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <!-- Core plugin JavaScript-->
-    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('public/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <!-- Page level plugin JavaScript-->
-    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('public/vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('public/vendor/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('public/vendor/datatables/dataTables.bootstrap4.js') }}"></script>
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('js/sb-admin.min.js') }}"></script>
+    <script src="{{ asset('public/js/sb-admin.min.js') }}"></script>
     <!-- Custom scripts for this page-->
-    <script src="{{ asset('js/sb-admin-datatables.min.js') }}"></script>
-    <script src="{{ asset('js/sb-admin-charts.min.js') }}"></script>
+    <script src="{{ asset('public/js/sb-admin-datatables.min.js') }}"></script>
+    <script src="{{ asset('public/js/sb-admin-charts.min.js') }}"></script>
     <!-- tags -->
-    <script src="{{ asset('tags/select2.min.js') }}"></script>
+    <script src="{{ asset('public/tags/select2.min.js') }}"></script>
     
     @if (session('status'))
     <div class="alert alert-success animated fadeInUp">
