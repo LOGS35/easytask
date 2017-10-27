@@ -55,3 +55,6 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::get('/user/find', 'UsersController@find');
+
+Route::get('obteneruser', 'Eloquent\ObjectResponseController@datauser');
+Route::get('obtenerequipo', 'Eloquent\ObjectResponseController@dataequipo');

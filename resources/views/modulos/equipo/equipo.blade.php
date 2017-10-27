@@ -28,7 +28,7 @@
           <i class="fa fa-fw fa-users" aria-hidden="true"></i>Equipos</div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="equipo-table" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <!--<th>ID</th>-->
@@ -38,44 +38,11 @@
                   <th>Acción</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <!--<th>ID</th>-->
-                  <th>Nombre</th>
-                  <th>Estado</th>
-                  <th>Fecha de creación</th>
-                  <th>Acción</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                @foreach($equipo as $equipo)
-                    <tr>
-                      <!--<td>{{ $equipo->id }}</td>-->
-                      <td>{{ $equipo->nombre }}</td>
-                      <td>
-                         @if ($equipo->estado == "Activo")
-                          <span class="badge badge-success">{{ $equipo->estado }}</span>
-                         @endif
-                         @if ($equipo->estado == "Inactivo")
-                          <span class="badge badge-warning">{{ $equipo->estado }}</span>
-                         @endif
-                      </td>
-                      <td>{{ $equipo->created_at }}</td>
-                      <td>
-                         @if ($equipo->estado == "Activo")
-                          <a href="{{ route('equip.destroy', $equipo->id) }}" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                         @endif 
-                         <a href="{{ route('equip.show', $equipo->id) }}" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                      </td>
-                    </tr>
-                @endforeach
-              </tbody>
             </table>
           </div>
           <!--$users->links() 
           $users->render()-->
         </div>
-        <div class="card-footer small text-muted">Ultima actualización {{ $equipo->created_at }}</div>
       </div>
     </div>
     <!-- /.container-fluid-->

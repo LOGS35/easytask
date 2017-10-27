@@ -43,6 +43,7 @@ $(document).ready(function () {
         }
     });
     /* Usuarios FIN */
+    /* find user ajax select */
     $(".js-example-theme-multiple").select2({
         minimumInputLength: 1
         , ajax: {
@@ -61,4 +62,29 @@ $(document).ready(function () {
             , cache: true
         }
     });
+    /* Datatables */
+        $('#users-table').DataTable({
+            serverSide: true,
+            processing: true,
+            ajax: 'obteneruser',
+            columns: [
+                {data: 'id'},
+                {data: 'name'},
+                {data: 'lastname'},
+                {data: 'type'},
+                {data: 'email'}
+                //{data: 'action', orderable: false, searchable: false}
+            ]
+        });
+    $('#equipo-table').DataTable({
+            serverSide: true,
+            processing: true,
+            ajax: 'obtenerequipo',
+            columns: [
+                {data: 'nombre'},
+                {data: 'estado'},
+                {data: 'created_at'},
+                {data: 'action', orderable: false, searchable: false}
+            ]
+        });
 });

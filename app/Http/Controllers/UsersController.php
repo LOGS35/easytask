@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+//use App\DataTables\UserDataTable;
 /*use App\Http\Request;*/
 use App\Http\Controllers\Controller;
 use App\User;
+use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\DB;
 /*use Alert;*/
 
 class UsersController extends Controller
@@ -47,7 +49,12 @@ class UsersController extends Controller
 
             //->paginate(10000);
         return view('modulos.usuarios.usuarios')->with('users', $users);
+        //return $dataTable->render('buttons.eloquent.index');
     }
+    /*public function getUsers()
+    {
+        return datatables()->of(DB::table('users'))->toJson();
+    }*/
 
     /**
      * Show the form for creating a new resource.
