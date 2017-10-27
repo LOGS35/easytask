@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
+use Alert;
 /*use Alert;*/
 
 class UsersController extends Controller
@@ -125,6 +126,17 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //alert('<a href="#">Click me</a>')->html()->persistent("No, thanks");
+        $user = User::find($id);
+        //Alert::message('Robots are working!');
+        $user->delete();
+        return back()->with('status','El usuario: '.$user->name.' '.$user->lastname.' a sido fue eliminado')->whith($user->id);
+        
+    //return home();
+        /*$user = User::find($id);
+        $user->destroy();*/
+        //echo '<script language="javascript">swal("Hello world!");</script>';
+        //return back()->with('status','Usuario eliminado');
+        
     }
 }

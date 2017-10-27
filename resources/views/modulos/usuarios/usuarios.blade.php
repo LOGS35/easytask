@@ -10,11 +10,22 @@
         </li>
         <li class="breadcrumb-item active">Usuarios</li>
       </ol>
+      <!-- Acciones -->
+      @if (Auth::user()->type == "Scrum Master")
+          <div class="card mb-3">
+              <div class="card-header">
+                  <i class="fa fa-cog fa-fw" aria-hidden="true"></i>Acciones
+              </div>
+              <div class="card-body">
+                    
+              </div> 
+          </div>
+      @endif
       <!-- Table equipo -->
       <!-- Example DataTables Card-->
       <div class="card mb-3-equip">
         <div class="card-header">
-          <i class="fa fa-fw fa-users" aria-hidden="true"></i>Equipos</div>
+          <i class="fa fa-fw fa-users" aria-hidden="true"></i>Usuarios</div>
         <div class="card-body">
             <table id="users-table" class="table table-bordered">
                 <thead>
@@ -24,6 +35,7 @@
                     <th>Apellidos</th>
                     <th>Puesto</th>
                     <th>Correo</th>
+                    <th>Acción</th>
                 </tr>
                 </thead>
             </table>
@@ -35,25 +47,21 @@
     <!-- /.container-fluid-->
 </div>
     <!-- Modal -->
-<div class="modal fade bd-example-modal-lg" id="crearteam" tabindex="-1" role="dialog" aria-labelledby="crearteam" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="crearteam">Crear equipo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {!! Form::open(['route' => ['profile.update', Auth::user()->id], 'method' => 'PUT']) !!}
-        
-        {!! Form::close() !!}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Crear equipo</button>
-      </div>
+<div class="modal" id="confirm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Delete Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you, want to delete?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-primary" id="delete-btn">Delete</button>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 @endsection

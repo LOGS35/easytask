@@ -20,18 +20,26 @@ class ObjectResponseController extends Controller
         
     {
         return $datatables->eloquent(User::query())
-                          ->editColumn('type', function ($user) {
-                              if ($user->type == "Scrum Master") {
-                              return '<span class="badge badge-danger">' . $user->type . '</span>';
-                                  } else if ($user->type == "Project Owner") {
-                              return '<span class="badge badge-warning">' . $user->type . '</span>';
-                                  } else if ($user->type == "Developer") {
-                              return '<span class="badge badge-info">' . $user->type . '</span>';
-                                  }
-                          })
+                ->editColumn('type', function ($user) {
+                if ($user->type == "Scrum Master") {
+                    return '<span class="badge badge-danger">' . $user->type . '</span>';
+                } else if ($user->type == "Project Owner") {
+                    return '<span class="badge badge-warning">' . $user->type . '</span>';
+                } else if ($user->type == "Developer") {
+                    return '<span class="badge badge-info">' . $user->type . '</span>';
+                }
+            })
+            ->addColumn('action','')        
+            ->editColumn('action', function ($user) {
+                if (Auth::user()->type == "Scrum Master") {
+                    return '<a href="'.route("users.destroy", $user->id).'" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>'.'<a href="'.route("users.show", $user->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+                } else {
+                    return '<a href="'.route("users.show", $user->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+                }   
+            })
                           //->addColumn('action', 'eloquent.tables.users-action')
-                          ->rawColumns(['type', 'action'])
-                          ->make(true);
+            ->rawColumns(['type', 'action'])
+            ->make(true);
         
         /*$query = User::all();
 
@@ -51,8 +59,7 @@ class ObjectResponseController extends Controller
                     return '<a href="'.route("equip.destroy", $equipo->id).'" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>'.'<a href="'.route("equip.show", $equipo->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
                 } else {
                     return '<a href="'.route("equip.show", $equipo->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
-                }
-                            
+                }   
             })
             ->editColumn('estado', function ($equipo) {
                 if ($equipo->estado == "Activo") {
@@ -60,6 +67,9 @@ class ObjectResponseController extends Controller
                 } else if ($equipo->estado == "Inactivo") {
                   return '<span class="badge badge-warning">' . $equipo->estado . '</span>';
                 }
+            })
+            ->editColumn('created_at', function ($equipo) {
+                return date('d/m/Y', strtotime($equipo->created_at));
             })
             ->rawColumns(['estado', 'action'])
             ->make(true);

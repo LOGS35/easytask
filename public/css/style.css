@@ -69,3 +69,8 @@ a.dropdown-item.small {
     text-align: left;
     font-weight: 500;
 }
+
+table a.badge {
+    margin: 0 5px;
+    font-size: 18px;
+}

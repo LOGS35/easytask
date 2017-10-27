@@ -52,6 +52,10 @@ Route::group(['middleware' => 'auth'], function(){
 
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('users','UsersController');
+    Route::get('users/{id}/destroy', [
+        'uses' => 'UsersController@destroy',
+        'as' => 'users.destroy'
+    ]);
 });
 
 Route::get('/user/find', 'UsersController@find');

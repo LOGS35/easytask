@@ -182,6 +182,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Sofa\Eloquence\ServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         /*UxWeb\SweetAlert\SweetAlertServiceProvider::class,*/
 
     ],
@@ -239,7 +240,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         /*'Alert' => UxWeb\SweetAlert\SweetAlert::class,*/
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
     ],
 
 ];

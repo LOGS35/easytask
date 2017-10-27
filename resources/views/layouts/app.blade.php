@@ -21,6 +21,9 @@
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     <!-- Tags -->
     <link href="{{ asset('tags/select2.min.css') }}" rel="stylesheet">
+    
+    <!-- Sweet -->
+    <script src="{{ asset('vendor/sweet/sweetalert.min.js') }}"></script>
 
     <!-- Styles -->
     <!--<link href="{} asset('css/app.css') {}" rel="stylesheet">-->
@@ -244,6 +247,8 @@
     <script src="{{ asset('js/sb-admin-charts.min.js') }}"></script>
     <!-- tags -->
     <script src="{{ asset('tags/select2.min.js') }}"></script>
+    <!-- Sweet -->
+    @include('sweet::alert')
     
     @if (session('status'))
     <div class="alert alert-success animated fadeInUp">

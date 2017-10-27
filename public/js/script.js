@@ -72,7 +72,8 @@ $(document).ready(function () {
                 {data: 'name'},
                 {data: 'lastname'},
                 {data: 'type'},
-                {data: 'email'}
+                {data: 'email'},
+                {data: 'action', orderable: false, searchable: false}
                 //{data: 'action', orderable: false, searchable: false}
             ]
         });
@@ -87,4 +88,8 @@ $(document).ready(function () {
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
+    /* Confirmación */
+    
+    
+  // FIN  
 });
