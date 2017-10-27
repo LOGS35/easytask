@@ -74,4 +74,5 @@ class ObjectResponseController extends Controller
             ->rawColumns(['estado', 'action'])
             ->make(true);
     }
+    
 }
