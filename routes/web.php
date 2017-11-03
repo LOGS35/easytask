@@ -43,14 +43,14 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::resource('equip','EquipController');
-    Route::get('equip/{id}/destroy', [
+    Route::resource('equipo','EquipController');
+    Route::get('equipo/{id}/destroy', [
         'uses' => 'EquipController@destroy',
-        'as' => 'equip.destroy'
+        'as' => 'equipo.destroy'
     ]);
-    Route::get('equip/{id}/show', [
+    Route::get('equipo/{id}', [
         'uses' => 'EquipController@show',
-        'as' => 'equip.show'
+        'as' => 'equipo.show'
     ]);
 });
 
@@ -60,9 +60,9 @@ Route::group(['middleware' => 'auth'], function(){
         'uses' => 'UsersController@destroy',
         'as' => 'users.destroy'
     ]);
-    Route::get('users/{id}/show', [
+    Route::get('users/{id}', [
         'uses' => 'UsersController@show',
-        'as' => 'users.destroy'
+        'as' => 'users.show'
     ]);
 });
 

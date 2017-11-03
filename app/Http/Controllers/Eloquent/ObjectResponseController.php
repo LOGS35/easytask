@@ -32,7 +32,7 @@ class ObjectResponseController extends Controller
             ->addColumn('action','')        
             ->editColumn('action', function ($user) {
                 if (Auth::user()->type == "Scrum Master") {
-                    return '<a href="'.route("users.destroy", $user->id).'" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>'.'<a href="'.route("users.show", $user->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+                    return '<a data-href="'.route("users.destroy", $user->id).'" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>'.'<a href="'.route("users.show", $user->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
                 } else {
                     return '<a href="'.route("users.show", $user->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
                 }   
@@ -52,13 +52,15 @@ class ObjectResponseController extends Controller
     }
     public function dataequipo(Datatables $datatables)    
     {
-        return $datatables->eloquent(Equipo::query())
+        $query = Equipo::all();
+        
+        return $datatables->collection($query)
             ->addColumn('action','')        
             ->editColumn('action', function ($equipo) {
                 if (Auth::user()->type == "Scrum Master") {
-                    return '<a href="'.route("equip.destroy", $equipo->id).'" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>'.'<a href="'.route("equip.show", $equipo->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+                    return '<a data-href="'.route("equipo.destroy", $equipo->id).'" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>'.'<a href="'.route("equipo.show", $equipo->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
                 } else {
-                    return '<a href="'.route("equip.show", $equipo->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+                    return '<a href="'.route("equipo.show", $equipo->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
                 }   
             })
             ->editColumn('estado', function ($equipo) {

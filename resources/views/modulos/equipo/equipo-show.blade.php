@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="content-wrapper profile">
+<div class="content-wrapper equipo-show">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
@@ -9,7 +9,7 @@
           <a href="{{ route('home') }}">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="{{ route('equip.index') }}">Equipos</a>
+          <a href="{{ route('equipo.index') }}">Equipos</a>
         </li>
         <li class="breadcrumb-item active">{{ $equipo->nombre }}</li>
       </ol>
@@ -21,6 +21,14 @@
               </div>
               <div class="card-body">
                     <a href="" class="btn btn-success" data-toggle="modal" data-target="#crearteam">Crear equipo</a>
+                    <div class="estado">
+                         @if ($equipo->estado == "Activo")
+                              <p class="badge badge-success">{{ $equipo->estado }}</p>
+                         @endif 
+                         @if ($equipo->estado == "Inactivo")
+                              <p class="badge badge-warning">{{ $equipo->estado }}</p>
+                         @endif 
+                     </div>
               </div> 
           </div>
       @endif
@@ -95,7 +103,7 @@
         </button>
       </div>
       <div class="modal-body">
-        {!! Form::open(['route' => 'equip.store', 'method' => 'POST']) !!}
+        {!! Form::open(['route' => 'equipo.store', 'method' => 'POST']) !!}
         <div class="form-group">
             <div class="form-row">
               <div class="col-md-12">

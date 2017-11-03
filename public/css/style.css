@@ -74,3 +74,32 @@ table a.badge {
     margin: 0 5px;
     font-size: 18px;
 }
+
+table a.badge.badge-danger i {
+    color: #fff;
+    cursor: pointer;
+}
+
+.equipo-show .estado {
+    display: inline-block;
+    float: right;
+}
+
+.equipo-show .estado p {
+    font-size: 1rem;
+    line-height: 1.25;
+    border-radius: .25rem;
+    transition: all .15s ease-in-out;
+    padding: .5rem .75rem;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    margin: 0;
+}

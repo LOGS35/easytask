@@ -130,7 +130,7 @@ class UsersController extends Controller
         $user = User::find($id);
         //Alert::message('Robots are working!');
         $user->delete();
-        return back()->with('status','El usuario: '.$user->name.' '.$user->lastname.' a sido fue eliminado')->whith($user->id);
+        return back()->with('status','El usuario: '.$user->name.' '.$user->lastname.' a sido fue eliminado');
         
     //return home();
         /*$user = User::find($id);

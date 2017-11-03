@@ -47,7 +47,7 @@
           </a>
           </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="left" title="Equipos">
-          <a class="nav-link" href="{{ route('equip.index') }}">
+          <a class="nav-link" href="{{ route('equipo.index') }}">
               <i class="fa fa-fw fa-users" aria-hidden="true"></i>
               <span class="nav-link-text">Equipos</span>
           </a>
@@ -230,6 +230,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/script-action.js') }}"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/popper/popper.min.js') }}"></script>
