@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace EasyTask\Http\Controllers;
 
 use Illuminate\Http\Request;
 

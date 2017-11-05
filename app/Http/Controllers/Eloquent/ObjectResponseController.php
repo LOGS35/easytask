@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Eloquent;
+namespace EasyTask\Http\Controllers\Eloquent;
 
-use App\Http\Controllers\Controller;
-use App\User;
-use App\Equipo;
+use EasyTask\Http\Controllers\Controller;
+use EasyTask\User;
+use EasyTask\Equipo;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
 

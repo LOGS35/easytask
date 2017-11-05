@@ -38,15 +38,19 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'], function(){
+/*Route::group(['middleware' => 'auth'], function(){
     Route::resource('profile','ProfileController');
-});
+});*/
 
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('equipo','EquipController');
     Route::get('equipo/{id}/destroy', [
         'uses' => 'EquipController@destroy',
         'as' => 'equipo.destroy'
+    ]);
+    Route::get('equipo/{id}/expulsar', [
+        'uses' => 'EquipController@expulsar',
+        'as' => 'equipo.expulsar'
     ]);
     Route::get('equipo/{id}', [
         'uses' => 'EquipController@show',
@@ -66,7 +70,7 @@ Route::group(['middleware' => 'auth'], function(){
     ]);
 });
 
-Route::get('/user/find', 'UsersController@find');
+Route::get('userfind', 'UsersController@find');
 
 Route::get('obteneruser', 'Eloquent\ObjectResponseController@datauser');
 Route::get('obtenerequipo', 'Eloquent\ObjectResponseController@dataequipo');

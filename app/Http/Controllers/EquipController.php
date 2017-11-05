@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace EasyTask\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\User;
-use App\Equipo;
+use EasyTask\Http\Controllers\Controller;
+use EasyTask\User;
+use EasyTask\Equipo;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-//use App\Http\Controllers\Flash;
+//use EasyTask\Http\Controllers\Flash;
 
 class EquipController extends Controller
 {
@@ -102,14 +102,15 @@ class EquipController extends Controller
     public function show($id)
     {
         //
-        $equipo = DB::table('users')
+        $user = DB::table('users')
+            ->select('users.id', 'name', 'lastname', 'type', 'email', 'users.created_at')
             ->join('equipo', 'users.id_equip', '=', 'equipo.id')
             ->where('equipo.id',$id)
             ->get();
         $equipoactual = Equipo::find($id);
         //dd($equipo);
             //->paginate(10000);
-        return view('modulos.equipo.equipo-show', ['users' => $equipo, 'equipo' => $equipoactual]);
+        return view('modulos.equipo.equipo-show', ['users' => $user, 'equipo' => $equipoactual]);
     }
 
     /**
@@ -132,7 +133,42 @@ class EquipController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $v = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:20',
+        ]);
+ 
+        if ($v->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($v->errors());
+        }
+        
+        $equipo = Equipo::find($id);
+        $equipo->nombre = $request->nombre;
+        $equipo->estado = "Activo";
+        //dd($equipo);
+        $equipo->save(); 
+        
+       /* $id_equip = DB::table('equipo')
+                ->select('id')
+                ->where('id',$id)
+                ->get();
+        
+        dd($id_equipo);
+        */
+        //dd($id_equip);
+        
+        /*$user = User::find($request->user[1]);
+        $user->id_equip = $id_equip->id;
+        $user->save();*/
+        if ($request->user != null) {
+            foreach ($request->user as $selectedOption) {
+                $user = User::find($selectedOption);
+                $user->id_equip = $id;
+                $user->save();
+            }
+        }
+        
+        return redirect()->back()->with('status', 'El equipo fue actualizado!'); 
     }
 
     /**
@@ -177,5 +213,11 @@ class EquipController extends Controller
         //dd($user);
         //dd($user);
         return back()->with('status', 'El equipo "'. $equipo->nombre .'" a pasado a modo inactivo y los integrantes han pasado a estar sin equipo!');
+    }
+    public function expulsar($id) {
+        $user = User::find($id);
+        $user->id_equip = null;
+        $user->save();
+        return back()->with('status', 'El usuario "'.$user->name.'" fue expulsado del equipo');
     }
 }

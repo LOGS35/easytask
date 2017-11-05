@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        EasyTask\Providers\AppServiceProvider::class,
+        EasyTask\Providers\AuthServiceProvider::class,
+        // EasyTask\Providers\BroadcastServiceProvider::class,
+        EasyTask\Providers\EventServiceProvider::class,
+        EasyTask\Providers\RouteServiceProvider::class,
         
         /* Mis providers */
         

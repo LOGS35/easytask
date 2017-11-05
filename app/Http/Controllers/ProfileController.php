@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace EasyTask\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\User;
+use EasyTask\User;
 
 class ProfileController extends Controller
 {

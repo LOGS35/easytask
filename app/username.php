@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace EasyTask;
 
 use Illuminate\Database\Eloquent\Model;
 use Sofa\Eloquence\Eloquence;

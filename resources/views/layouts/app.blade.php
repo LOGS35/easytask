@@ -117,7 +117,7 @@
               <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00 instead of 4:00. Thanks!</div>
             </a>-->
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item small" href="#">View all messages</a>
+            <a class="dropdown-item small" href="#">Ver todos los mensajes</a>
           </div>
         </li>
         <!--<li class="nav-item dropdown">
@@ -170,7 +170,7 @@
             <ul class="dropdown-menu" role="menu">
                 <li><h6 class="dropdown-header">Menu</h6></li>
                 <div class="dropdown-divider"></div>
-                <li><a class="dropdown-item small" href="{{ route('profile.index') }}">
+                <li><a class="dropdown-item small" href="{{ route('users.show', Auth::user()->id) }}">
                 <i class="fa fa-user" aria-hidden="true"></i>Mi perfil</a></li>
                 <div class="dropdown-divider"></div>
                 <li><a class="dropdown-item small" data-toggle="modal" data-target="#exampleModal">

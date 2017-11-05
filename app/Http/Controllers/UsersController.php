@@ -1,15 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace EasyTask\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use App\DataTables\UserDataTable;
-/*use App\Http\Request;*/
-use App\Http\Controllers\Controller;
-use App\User;
+//use EasyTask\DataTables\UserDataTable;
+/*use EasyTask\Http\Request;*/
+use EasyTask\Http\Controllers\Controller;
+use EasyTask\User;
+use EasyTask\Equipo;
+use EasyTask\Proyecto;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
 use Alert;
+use Illuminate\Support\Facades\Validator;
 /*use Alert;*/
 
 class UsersController extends Controller
@@ -92,7 +95,14 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $equipo = Equipo::find($user->id_equip);
+        if ($equipo->id_proy != null) {
+            $proyecto = Proyecto::find($equipo->id_proy);
+            return view('modulos.usuarios.user-show', ['users' => $user, 'equipo' => $equipo, 'proyecto' => $proyecto]);
+        }
+            //->paginate(10000);
+        return view('modulos.usuarios.user-show', ['users' => $user, 'equipo' => $equipo]);
     }
 
     /**
@@ -115,7 +125,25 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $v = Validator::make($request->all(), [
+            
+            'name' => 'required|string|max:20',
+            'lastname' => 'required|string|max:20',
+            'email' => 'required|string|email|max:40',
+            'type' => 'required|max:255',
+        ]);
+ 
+        if ($v->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($v->errors());
+        }
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->type = $request->type;
+        $user->email = $request->email;
+        $user->save();
+        return redirect()->back()->with('status', 'Usuario modificado!'); 
     }
 
     /**

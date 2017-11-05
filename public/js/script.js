@@ -47,7 +47,7 @@ $(document).ready(function () {
     $(".js-example-theme-multiple").select2({
         minimumInputLength: 1
         , ajax: {
-            url: 'user/find'
+            url: '/userfind'
             , dataType: 'json'
             , data: function (params) {
                 return {

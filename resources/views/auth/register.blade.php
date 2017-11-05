@@ -63,7 +63,7 @@
                             <div class="form-row">
                                 <div class="col-md-12">
                                     {!! Form::label('type', 'Rol') !!}
-               {!! Form::select('type', ['' => 'Seleccione', 'Scrum Master' => 'Scrum Master', 'Project Owner' => 'Project Owner', 'Developer' => 'Developer'], null, ['class' => 'form-control']) !!}
+               {!! Form::select('type', ['' => 'Seleccione', 'Scrum Master' => 'Scrum Master', 'Developer' => 'Developer'], null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
                         </div>

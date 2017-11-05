@@ -6,14 +6,23 @@
        <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+          <a href="{{ route('home') }}">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Mi perfil</li>
+        <li class="breadcrumb-item">
+          <a href="{{ route('users.index') }}">Usuarios</a>
+        </li>
+        <li class="breadcrumb-item active">{{ $users->name }} {{ $users->lastname }}</li>
       </ol>
-        <div class="card card-register mx-auto mt-5 mb-5">
-            <div class="card-header">Perfil<i class="fa fa-pencil btn btn-primary" aria-hidden="true"></i></div>
+       <div class="row">
+        <div class="col-xs-12 col-md-7">
+           <div class="card">
+            <div class="card-header">Perfil
+                @if(Auth::user()->id == $users->id)
+                <i class="fa fa-pencil btn btn-primary" aria-hidden="true"></i>
+                @endif
+            </div>
             <div class="card-body">
-               {!! Form::open(['route' => ['profile.update', Auth::user()->id], 'method' => 'PUT']) !!}
+               {!! Form::open(['route' => ['users.update', Auth::user()->id], 'method' => 'PUT']) !!}
                    <div class="form-group">
                        <div class="form-row">
                            <div class="col-md-6">
@@ -71,7 +80,35 @@
                    </div>
                 {!! Form::close() !!}
             </div>
+            <div class="card-footer" style="text-align:right;">
+                <span>Miembro desde: {{ Carbon\Carbon::parse($users->created_at)->format('d-m-Y') }}</span>
+            </div>
         </div>
+    </div>
+        <div class="col-xs-12 col-md-5">
+            <div class="card">
+                <div class="card-header">Equipo</div>
+                <div class="card-body">
+                    @if($users->id_equip != null)
+                        <p><span class="badge badge-danger">Nombre:</span> <a href="{{ route('equipo.show', $equipo->id) }}">{{ $equipo->nombre }}</a></p>
+                        <p><span class="badge badge-info">Fecha de creación:</span> {{ Carbon\Carbon::parse($equipo->created_at)->format('d-m-Y') }}</p>
+                        <p><span class="badge badge-primary">Proyecto actual:</span> 
+                        @if($equipo->id_proy != null)
+                            {{ $proyecto->name }}
+                        @else
+                            no tiene asignado un proyecto
+                        @endif
+                        </p>
+                        @if(Auth::user()->id == $users->id)
+                            <a data-href="" class="btn btn-danger" style="float:right;color:#fff;cursor:pointer;">Salir del equipo <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                        @endif
+                    @else
+                        <p>Esta persona no es parte de un equipo</p>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </div>
 @if ($errors->has('password') || $errors->has('email') || $errors->has('lastname') || $errors->has('name') || $errors->has('type'))

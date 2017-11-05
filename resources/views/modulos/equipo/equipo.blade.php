@@ -17,7 +17,7 @@
                   <i class="fa fa-cog fa-fw" aria-hidden="true"></i>Acciones
               </div>
               <div class="card-body">
-                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#crearteam">Crear equipo</a>
+                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#crearteam">Crear equipo<i class="fa fa-plus fa-fw" aria-hidden="true"></i></a>
               </div> 
           </div>
       @endif
@@ -73,7 +73,7 @@
         </div>
         <div class="form-group">
                 {!! Form::label('usuarios', 'Usuarios') !!}
-                <select class="js-example-theme-multiple form-control" name="user[]" multiple="multiple"></select>
+                <select class="js-example-theme-multiple form-control" name="user[]" multiple="multiple" required></select>
         </div>
       </div>
       <div class="modal-footer">

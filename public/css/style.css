@@ -81,8 +81,9 @@ table a.badge.badge-danger i {
 }
 
 .equipo-show .estado {
-    display: inline-block;
-    float: right;
+    display: inline-block;/* 
+    float: right; */
+    margin: 0 5px;
 }
 
 .equipo-show .estado p {
