@@ -17,8 +17,16 @@ $(document).ready(function () {
     $('#menumovil').on('click', function(e) {
         $($(this).data('target')).toggle("slow");
     });
-    /*$('.dropdown').on('click', function(e) {
-        $($(this).data('target')).toggle("slow");
-        $(this).addClass('collapsed');
-    });*/
+    $('.dropdown').on('click', function(e) {
+        /*$($('.dropdown').data('target')).addClass('collapsed');
+        $($('.dropdown').data('target')).toggle("slow");*/
+        
+        if ($(this).hasClass('collapsed')) {
+            $($(this).data('target')).toggle("slow");
+            $(this).removeClass('collapsed');
+        } else {
+            $($(this).data('target')).toggle("slow");
+            $(this).addClass('collapsed');
+        }
+    });
 });

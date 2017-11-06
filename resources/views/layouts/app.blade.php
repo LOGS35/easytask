@@ -52,7 +52,7 @@
           </a>
           </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Equipo">
-              <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseEquipo" data-parent="#exampleAccordion">
+              <a class="nav-link nav-link-collapse collapsed dropdown" href="#collapseEquipo" data-target="#collapseEquipo">
                 <i class="fa fa-fw fa-users"></i>
                 <span class="nav-link-text">Equipo</span>
               </a>
@@ -68,7 +68,7 @@
               </ul>
           </li> 
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Proyecto">
-              <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseProject" data-parent="#exampleAccordion">
+              <a class="nav-link nav-link-collapse collapsed dropdown" href="#collapseProject" data-target="#collapseProject">
                 <i class="fa fa-fw fa-folder-open"></i>
                 <span class="nav-link-text">Proyecto</span>
               </a>
@@ -82,7 +82,7 @@
               </ul>
           </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tareas">
-              <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseTask" data-parent="#exampleAccordion">
+              <a class="nav-link nav-link-collapse collapsed dropdown" href="#collapseTask" data-target="#collapseTask">
                 <i class="fa fa-fw fa-list"></i>
                 <span class="nav-link-text">Tareas</span>
               </a>
@@ -96,7 +96,7 @@
               </ul>
           </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Noticias">
-              <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsenews" data-parent="#exampleAccordion">
+              <a class="nav-link nav-link-collapse collapsed dropdown" href="#collapsenews" data-target="#collapsenews">
                 <i class="fa fa-fw fa-newspaper-o"></i>
                 <span class="nav-link-text">Noticias</span>
               </a>
