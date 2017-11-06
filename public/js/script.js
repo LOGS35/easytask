@@ -20,9 +20,9 @@ $(document).ready(function() {
             $('.profile select').attr('disabled', 'disabled');
             $('.profile .password-confirm').fadeOut('fast');
             $('.profile .input-popover input[type="password"]').parent('.input-popover').parent('#error').parent('.col-md-12').removeClass('col-lg-6');
-            $('.profile .input-popover input[type="password"]').val(contraseña);
-            $('.profile .password-confirm input[type="password"]').val(contraseña);
-            $('.profile .button-submit').fadeOut('fast');
+            //$('.profile .input-popover input[type="password"]').val(contraseña);
+            //$('.profile .password-confirm input[type="password"]').val(contraseña);
+            $('.profile .button-submit').fadeOut("fast");
         }
         else {
             $('.profile .card-header i.fa.fa-pencil.btn.btn-primary').parents('.card').addClass('edit');

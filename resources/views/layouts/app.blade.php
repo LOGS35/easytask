@@ -30,10 +30,10 @@
 <body>
      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'EasyTask') }}
-                    </a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="{{ url('/') }}">
+       {{ config('app.name', 'EasyTask') }}
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-target="#navbarResponsive" id="menumovil">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">

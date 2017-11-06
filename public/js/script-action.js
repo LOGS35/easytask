@@ -14,4 +14,11 @@ $(document).ready(function () {
         //console.log($(this).data('href'));
         $('#elimmodal').find('.btn.btn-primary').attr("href",$(this).data('href'));
     });
+    $('#menumovil').on('click', function(e) {
+        $($(this).data('target')).toggle("slow");
+    });
+    /*$('.dropdown').on('click', function(e) {
+        $($(this).data('target')).toggle("slow");
+        $(this).addClass('collapsed');
+    });*/
 });
