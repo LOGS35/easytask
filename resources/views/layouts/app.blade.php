@@ -21,7 +21,6 @@
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     <!-- Tags -->
     <link href="{{ asset('tags/select2.min.css') }}" rel="stylesheet">
-    
     <!-- Sweet -->
     <script src="{{ asset('vendor/sweet/sweetalert.min.js') }}"></script>
 
@@ -46,17 +45,69 @@
             <span class="nav-link-text">Dashboard</span>
           </a>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="left" title="Equipos">
-          <a class="nav-link" href="{{ route('equipo.index') }}">
-              <i class="fa fa-fw fa-users" aria-hidden="true"></i>
-              <span class="nav-link-text">Equipos</span>
-          </a>
-          </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="left" title="Usuarios">
           <a class="nav-link" href="{{ route('users.index') }}">
               <i class="fa fa-fw fa-user" aria-hidden="true"></i>
               <span class="nav-link-text">Usuarios</span>
           </a>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Equipo">
+              <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseEquipo" data-parent="#exampleAccordion">
+                <i class="fa fa-fw fa-users"></i>
+                <span class="nav-link-text">Equipo</span>
+              </a>
+              <ul class="sidenav-second-level collapse" id="collapseEquipo">
+                @if(Auth::user()->id_equip != null)
+                 <li>
+                  <a href="{{ route('equipo.show', Auth::user()->id_equip) }}">Mi equipo</a>
+                 </li>
+                 @endif
+                <li>
+                  <a href="{{ route('equipo.index') }}">Todos los equipos</a>
+                </li>
+              </ul>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Proyecto">
+              <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseProject" data-parent="#exampleAccordion">
+                <i class="fa fa-fw fa-folder-open"></i>
+                <span class="nav-link-text">Proyecto</span>
+              </a>
+              <ul class="sidenav-second-level collapse" id="collapseProject">
+                <li>
+                  <a href="">Mi proyecto</a>
+                </li>
+                <li>
+                  <a href="{{ route('proyecto.index') }}">Todos los proyectos</a>
+                </li>
+              </ul>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tareas">
+              <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseTask" data-parent="#exampleAccordion">
+                <i class="fa fa-fw fa-list"></i>
+                <span class="nav-link-text">Tareas</span>
+              </a>
+              <ul class="sidenav-second-level collapse" id="collapseTask">
+                <li>
+                  <a href="">Mis tareas</a>
+                </li>
+                <li>
+                  <a href="">Todas las tareas</a>
+                </li>
+              </ul>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Noticias">
+              <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsenews" data-parent="#exampleAccordion">
+                <i class="fa fa-fw fa-newspaper-o"></i>
+                <span class="nav-link-text">Noticias</span>
+              </a>
+              <ul class="sidenav-second-level collapse" id="collapsenews">
+                <li>
+                  <a href="">Mis noticias</a>
+                </li>
+                <li>
+                  <a href="">Todas las noticias</a>
+                </li>
+              </ul>
           </li>
         <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
           <a class="nav-link" href="tables.html">

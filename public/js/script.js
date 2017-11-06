@@ -3,7 +3,7 @@
  * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
  */
-$(document).ready(function () {
+$(document).ready(function() {
     /* Usuarios */
     $(function () {
         $('.profile input[type="text"]').attr('disabled', 'disabled');
@@ -62,13 +62,32 @@ $(document).ready(function () {
             , cache: true
         }
     });
+    /* find equipo */
+    $('.js-example-basic-single').select2({
+        minimumInputLength: 1
+        , ajax: {
+            url: '/equipofind'
+            , dataType: 'json'
+            , data: function (params) {
+                return {
+                    q: $.trim(params.term)
+                };
+            }
+            , processResults: function (data) {
+                return {
+                    results: data
+                };
+            }
+            , cache: true
+        }
+    });
     /* Datatables */
         $('#users-table').DataTable({
             serverSide: true,
             processing: true,
             ajax: 'obteneruser',
             columns: [
-                {data: 'id'},
+                //{data: 'id'},
                 {data: 'name'},
                 {data: 'lastname'},
                 {data: 'type'},
@@ -84,6 +103,19 @@ $(document).ready(function () {
             ajax: 'obtenerequipo',
             columns: [
                 {data: 'nombre'},
+                {data: 'estado'},
+                {data: 'created_at'},
+                {data: 'action', orderable: false, searchable: false}
+                /*{"defaultContent": "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	<button type='button' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button><button type='button' class='ver btn btn-success'><i class='fa fa-eye'></i></button>"}*/
+            ]
+        });
+    $('#proyecto-table').DataTable({
+            serverSide: true,
+            processing: true,
+            ajax: 'obtenerproyecto',
+            columns: [
+                {data: 'name'},
+                {data: 'description'},
                 {data: 'estado'},
                 {data: 'created_at'},
                 {data: 'action', orderable: false, searchable: false}

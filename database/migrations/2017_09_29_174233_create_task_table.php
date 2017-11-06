@@ -19,8 +19,7 @@ class CreateTaskTable extends Migration
             $table->string('description', 100);
             //$table->string('movimiento', 100);
             $table->enum('estado', ['BackLog Proyecto', 'BackLog Usuario','En Proceso'])->default('BackLog Proyecto');
-            $table->dateTime('fecha_creacion');
-            $table->dateTime('fecha_fin');
+            $table->dateTime('fecha_fin')->nullable();
             $table->integer('id_usuario')->unsigned();
             $table->integer('id_proyecto')->unsigned();
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');

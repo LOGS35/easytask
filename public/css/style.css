@@ -104,3 +104,11 @@ table a.badge.badge-danger i {
     border: 1px solid transparent;
     margin: 0;
 }
+
+table {
+    width: 100% !important;
+}
+
+.select2-container .select2-selection--single {
+    min-height: 35px;
+}

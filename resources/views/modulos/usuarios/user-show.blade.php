@@ -28,14 +28,14 @@
                            <div class="col-md-6">
                                <div class="{{ $errors->has('name') ? ' has-error' : '' }}">
                                 {!! Form::label('name', 'Nombre') !!}
-                                {!! Form::text('name', Auth::user()->name, ['class' => 'form-control', 'placeholder' => 'Nombre', 'required', 'autofocus']) !!}
+                                {!! Form::text('name', $users->name, ['class' => 'form-control', 'placeholder' => 'Nombre', 'required', 'autofocus']) !!}
                                 
                                </div>
                            </div>
                            <div class="col-md-6">
                                <div class="{{ $errors->has('lastname') ? ' has-error' : '' }}">
                                 {!! Form::label('lastname', 'Apellidos') !!}
-                                {!! Form::text('lastname', Auth::user()->lastname, ['class' => 'form-control', 'placeholder' => 'Apellidos', 'required', 'autofocus']) !!}
+                                {!! Form::text('lastname', $users->lastname, ['class' => 'form-control', 'placeholder' => 'Apellidos', 'required', 'autofocus']) !!}
                                 
                                </div>
                            </div>
@@ -46,7 +46,7 @@
                            <div class="col-md-12">
                               <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
                                {!! Form::label('email', 'Correo Electronico') !!}
-                               {!! Form::email('email', Auth::user()->email, ['class' => 'form-control', 'placeholder' => 'example@gmail.com', 'required', 'autofocus']) !!}
+                               {!! Form::email('email', $users->email, ['class' => 'form-control', 'placeholder' => 'example@gmail.com', 'required', 'autofocus']) !!}
                                 
                                </div>
                            </div>
@@ -58,11 +58,11 @@
                                <div class="{{ $errors->has('type') ? ' has-error' : '' }}">
                                 <label for="email" class="control-label">Rol</label>
                                 <select name="type" id="type" class="form-control" required autofocus>
-                                   @if (Auth::user()->type == "Scrum Master")
+                                   @if ($users->type == "Scrum Master")
                                     <option value="{{ Auth::user()->type }}">{{ Auth::user()->type }}</option>
                                     <option value="Developer">Developer</option>
                                    @endif
-                                   @if (Auth::user()->type == "Developer")
+                                   @if ($users->type == "Developer")
                                     <option value="{{ Auth::user()->type }}">{{ Auth::user()->type }}</option>
                                     <option value="Scrum Master">Scrum Master</option>
                                    @endif
@@ -96,14 +96,18 @@
                         @if($equipo->id_proy != null)
                             {{ $proyecto->name }}
                         @else
-                            no tiene asignado un proyecto
+                            Ninguno
                         @endif
                         </p>
-                        @if(Auth::user()->id == $users->id)
-                            <a data-href="" class="btn btn-danger" style="float:right;color:#fff;cursor:pointer;">Salir del equipo <i class="fa fa-sign-out" aria-hidden="true"></i></a>
-                        @endif
                     @else
                         <p>Esta persona no es parte de un equipo</p>
+                    @endif
+                </div>
+                <div class="card-footer exit-team">
+                    @if($users->id_equip != null)
+                        @if(Auth::user()->id == $users->id)
+                            <a data-href="{{ route('equipo.expulsar', $users->id) }}" class="btn btn-danger" style="float:right;color:#fff;cursor:pointer;">Salir del equipo <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                        @endif
                     @endif
                 </div>
             </div>
@@ -141,4 +145,36 @@
                                 @endif
 </div>
 @endif
+
+<!-- Modal confirm -->
+<div class="modal fade" id="elimmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+        @if($users->id_equip != null)
+           @if(Auth::user()->id == $users->id)
+                ¿Esta seguro que desea salir del equipo {{ $equipo->nombre}}?
+           @endif
+        @endif 
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       @if($users->id_equip != null)
+        @if(Auth::user()->id == $users->id)
+            No hay vuelta atras, estas apunto de salir del equipo {{ $equipo->nombre }}
+        @endif
+       @endif
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-primary">Salirme</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection

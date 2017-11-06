@@ -9,4 +9,9 @@ $(document).ready(function () {
         //console.log($(this).data('href'));
         $('#elimmodal').find('.btn.btn-primary').attr("href",$(this).data('href'));
     });
+    $(document).on('click', '.exit-team .btn.btn-danger',function (e) {
+        $('#elimmodal').modal('toggle');
+        //console.log($(this).data('href'));
+        $('#elimmodal').find('.btn.btn-primary').attr("href",$(this).data('href'));
+    });
 });

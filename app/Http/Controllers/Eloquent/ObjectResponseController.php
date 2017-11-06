@@ -5,6 +5,7 @@ namespace EasyTask\Http\Controllers\Eloquent;
 use EasyTask\Http\Controllers\Controller;
 use EasyTask\User;
 use EasyTask\Equipo;
+use EasyTask\Proyecto;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
 
@@ -76,5 +77,36 @@ class ObjectResponseController extends Controller
             ->rawColumns(['estado', 'action'])
             ->make(true);
     }
-    
+    public function dataproyecto(Datatables $datatables)    
+    {
+        $query = Proyecto::all();
+        
+        return $datatables->collection($query)
+            ->addColumn('action','')        
+            ->editColumn('action', function ($proyecto) {
+                if (Auth::user()->type == "Scrum Master") {
+                    return '<a data-href="'.route("proyecto.destroy", $proyecto->id).'" class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>'.'<a href="'.route("proyecto.show", $proyecto->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+                } else {
+                    return '<a href="'.route("proyecto.show", $proyecto->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
+                }   
+            })
+            ->editColumn('estado', function ($proyecto) {
+                if ($proyecto->estado == "En proceso") {
+                    return '<span class="badge badge-info">' . $proyecto->estado . '</span>';
+                } else if ($equipo->estado == "En revisión") {
+                  return '<span class="badge badge-primary">' . $proyecto->estado . '</span>';
+                } else if ($equipo->estado == "Incompleto") {
+                  return '<span class="badge badge-warning">' . $proyecto->estado . '</span>';
+                } else if ($equipo->estado == "Detenido") {
+                  return '<span class="badge badge-danger">' . $proyecto->estado . '</span>';
+                } else if ($equipo->estado == "Terminado") {
+                  return '<span class="badge badge-success">' . $proyecto->estado . '</span>';
+                }
+            })
+            ->editColumn('created_at', function ($proyecto) {
+                return date('d/m/Y', strtotime($proyecto->created_at));
+            })
+            ->rawColumns(['estado', 'action'])
+            ->make(true);
+    }
 }

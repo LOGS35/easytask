@@ -16,11 +16,9 @@ class CreateProyectoTable extends Migration
         Schema::create('proyecto', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 20);
-            $table->dateTime('fecha_inicio');
-            $table->dateTime('fecha_fin');
+            $table->dateTime('fecha_fin')->nullable();
             $table->string('description', 100);
-            $table->enum('estado', ['En proceso', 'En revisión','Aprobado','Falta Información','Incompleto','Detenido','Terminado'])->default('En proceso');
-            $table->string('comentarios', 60);
+            $table->enum('estado', ['En proceso', 'En revisión','Incompleto','Detenido','Terminado'])->default('En proceso');
             $table->timestamps();
         });
     }

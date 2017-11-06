@@ -97,9 +97,11 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $equipo = Equipo::find($user->id_equip);
-        if ($equipo->id_proy != null) {
-            $proyecto = Proyecto::find($equipo->id_proy);
-            return view('modulos.usuarios.user-show', ['users' => $user, 'equipo' => $equipo, 'proyecto' => $proyecto]);
+        if ($user->id_equip != null) {
+            if ($equipo->id_proy != null) {
+                $proyecto = Proyecto::find($equipo->id_proy);
+                return view('modulos.usuarios.user-show', ['users' => $user, 'equipo' => $equipo, 'proyecto' => $proyecto]);
+            }
         }
             //->paginate(10000);
         return view('modulos.usuarios.user-show', ['users' => $user, 'equipo' => $equipo]);

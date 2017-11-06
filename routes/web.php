@@ -70,7 +70,13 @@ Route::group(['middleware' => 'auth'], function(){
     ]);
 });
 
+Route::group(['middleware' => 'auth'], function(){
+    Route::resource('proyecto','ProyectoController');
+});
+
 Route::get('userfind', 'UsersController@find');
+Route::get('equipofind', 'EquipController@find');
 
 Route::get('obteneruser', 'Eloquent\ObjectResponseController@datauser');
 Route::get('obtenerequipo', 'Eloquent\ObjectResponseController@dataequipo');
+Route::get('obtenerproyecto', 'Eloquent\ObjectResponseController@dataproyecto');

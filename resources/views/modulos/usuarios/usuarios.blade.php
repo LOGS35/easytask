@@ -6,7 +6,7 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Dashboard</a>
+          <a href="{{ route('home') }}">Dashboard</a>
         </li>
         <li class="breadcrumb-item active">Usuarios</li>
       </ol>
@@ -30,7 +30,7 @@
             <table id="users-table" class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <!--<th>ID</th>-->
                     <th>Nombre</th>
                     <th>Apellidos</th>
                     <th>Puesto</th>

@@ -21,6 +21,24 @@ class EquipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function find(Request $request)
+    {
+        $term = trim($request->q);
+
+        if (empty($term)) {
+            return \Response::json([]);
+        }
+
+        $equipo = Equipo::search($term)->limit(5)->get();
+
+        $formatted_tags = [];
+
+        foreach ($equipo as $equip) {
+                $formatted_tags[] = ['id' => $equip->id, 'text' => $equip->nombre];
+        }
+
+        return \Response::json($formatted_tags);
+    }
     public function index()
     {
         /*$equipo = DB::table('users')
