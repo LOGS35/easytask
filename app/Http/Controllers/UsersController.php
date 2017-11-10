@@ -34,7 +34,7 @@ class UsersController extends Controller
             return \Response::json([]);
         }
 
-        $users = User::search($term)->limit(5)->get();
+        $users = User::search($term)->limit(100)->get();
 
         $formatted_tags = [];
 

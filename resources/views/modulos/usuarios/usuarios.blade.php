@@ -58,7 +58,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Tenga encuenta que no podra recuperarlo
+        Tenga en cuenta que no podras recuperarlo
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

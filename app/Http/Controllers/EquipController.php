@@ -29,7 +29,7 @@ class EquipController extends Controller
             return \Response::json([]);
         }
 
-        $equipo = Equipo::search($term)->limit(5)->get();
+        $equipo = Equipo::search($term)->limit(100)->get();
 
         $formatted_tags = [];
 
