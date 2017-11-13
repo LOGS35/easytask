@@ -14,6 +14,6 @@ class equipo extends Model
     protected $table = "equipo";
     
     protected $fillable = [
-        'nombre','estado','id_proy',
+        'nombre','estado',
     ];
 }

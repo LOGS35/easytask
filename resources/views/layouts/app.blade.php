@@ -27,7 +27,7 @@
     <!-- Styles -->
     <!--<link href="{} asset('css/app.css') {}" rel="stylesheet">-->
 </head>
-<body>
+<body id="page-top">
      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <!-- Branding Image -->
     <a class="navbar-brand" href="{{ url('/') }}">
@@ -49,6 +49,12 @@
           <a class="nav-link" href="{{ route('users.index') }}">
               <i class="fa fa-fw fa-user" aria-hidden="true"></i>
               <span class="nav-link-text">Usuarios</span>
+          </a>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="left" title="Clientes">
+          <a class="nav-link" href="{{ route('clientes.index') }}">
+              <i class="fa fa-fw fa-address-book" aria-hidden="true"></i>
+              <span class="nav-link-text">Clientes</span>
           </a>
           </li>
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Equipo">
@@ -73,9 +79,9 @@
                 <span class="nav-link-text">Proyecto</span>
               </a>
               <ul class="sidenav-second-level collapse" id="collapseProject">
-                <li>
+                <!--<li>
                   <a href="">Mi proyecto</a>
-                </li>
+                </li>-->
                 <li>
                   <a href="{{ route('proyecto.index') }}">Todos los proyectos</a>
                 </li>
@@ -254,7 +260,10 @@
         </div>
       </div>
     </footer>
-
+<!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
     <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">

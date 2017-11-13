@@ -29,4 +29,7 @@ $(document).ready(function () {
             $(this).addClass('collapsed');
         }
     });
+    $(document).on('click', '.card-body',function (e) {
+        $('label select').removeAttr("disabled");
+    });
 });

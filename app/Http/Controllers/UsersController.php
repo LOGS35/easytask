@@ -97,14 +97,17 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $equipo = Equipo::find($user->id_equip);
-        if ($user->id_equip != null) {
+        $proyectos = DB::table('proyecto')
+            ->where('id_equipo',$user->id_equip)
+            ->get();
+        /*if ($user->id_equip != null) {
             if ($equipo->id_proy != null) {
                 $proyecto = Proyecto::find($equipo->id_proy);
                 return view('modulos.usuarios.user-show', ['users' => $user, 'equipo' => $equipo, 'proyecto' => $proyecto]);
             }
-        }
+        }*/
             //->paginate(10000);
-        return view('modulos.usuarios.user-show', ['users' => $user, 'equipo' => $equipo]);
+        return view('modulos.usuarios.user-show', ['users' => $user, 'equipo' => $equipo, 'proyecto' => $proyectos]);
     }
 
     /**
@@ -160,7 +163,7 @@ class UsersController extends Controller
         $user = User::find($id);
         //Alert::message('Robots are working!');
         $user->delete();
-        return back()->with('status','El usuario: '.$user->name.' '.$user->lastname.' a sido fue eliminado');
+        return back()->with('status','El usuario: '.$user->name.' '.$user->lastname.' fue eliminado');
         
     //return home();
         /*$user = User::find($id);

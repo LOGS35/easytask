@@ -126,9 +126,12 @@ class EquipController extends Controller
             ->where('equipo.id',$id)
             ->get();
         $equipoactual = Equipo::find($id);
+        $proyectos = DB::table('proyecto')
+            ->where('id_equipo',$id)
+            ->get();
         //dd($equipo);
             //->paginate(10000);
-        return view('modulos.equipo.equipo-show', ['users' => $user, 'equipo' => $equipoactual]);
+        return view('modulos.equipo.equipo-show', ['users' => $user, 'equipo' => $equipoactual, 'proyecto' => $proyectos]);
     }
 
     /**

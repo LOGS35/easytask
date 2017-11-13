@@ -112,3 +112,7 @@ table {
 .select2-container .select2-selection--single {
     min-height: 35px;
 }
+
+#proyecto-table thead th:nth-child(2) {
+    width: 30% !important;
+}

@@ -92,13 +92,6 @@
                     @if($users->id_equip != null)
                         <p><span class="badge badge-danger">Nombre:</span> <a href="{{ route('equipo.show', $equipo->id) }}">{{ $equipo->nombre }}</a></p>
                         <p><span class="badge badge-info">Fecha de creación:</span> {{ Carbon\Carbon::parse($equipo->created_at)->format('d-m-Y') }}</p>
-                        <p><span class="badge badge-primary">Proyecto actual:</span> 
-                        @if($equipo->id_proy != null)
-                            {{ $proyecto->name }}
-                        @else
-                            Ninguno
-                        @endif
-                        </p>
                     @else
                         <p>Esta persona no es parte de un equipo</p>
                     @endif
@@ -109,6 +102,38 @@
                             <a data-href="{{ route('equipo.expulsar', $users->id) }}" class="btn btn-danger" style="float:right;color:#fff;cursor:pointer;">Salir del equipo <i class="fa fa-sign-out" aria-hidden="true"></i></a>
                         @endif
                     @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 mb-3-equip">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Proyectos actuales
+                <i class="fa fa-fw fa-folder-open" aria-hidden="true"></i>
+                </div>
+                <div class="card-body">
+                   <div class="row">
+                    @foreach($proyecto as $proyecto) 
+                           @if($proyecto->estado != 'Terminado')
+                            <div class="col-md-4">                               
+                                <div class="card">
+                                    <div class="card-header">{{ $proyecto->name }}</div>
+                                    <div class="card-body">
+                                        <span class="badge badge-info">Descripción:</span> {{ $proyecto->description }}
+                                        <div class="dropdown-divider"></div>
+                                        <span class="badge badge-success">Estado:</span>{{ $proyecto->estado }}
+                                        <div class="dropdown-divider"></div>
+                                        <a href="{{ route('proyecto.show',$proyecto->id) }}" class="btn btn-success">Ver proyecto<i class="fa fa-eye fa-fw" aria-hidden="true"></i></a>
+                                    </div>
+                                    <div class="card-footer">
+                                        Proyecto creado: {{ $proyecto->created_at }}
+                                    </div>
+                                </div>
+                       </div>
+                       @endif
+                    @endforeach
+                    </div>
                 </div>
             </div>
         </div>

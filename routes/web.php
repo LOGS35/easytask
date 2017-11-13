@@ -71,7 +71,15 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::group(['middleware' => 'auth'], function(){
+    Route::resource('clientes','ClienteController');
+});
+
+Route::group(['middleware' => 'auth'], function(){
     Route::resource('proyecto','ProyectoController');
+    Route::get('proyecto/{id}/destroy', [
+        'uses' => 'ProyectoController@destroy',
+        'as' => 'proyecto.destroy'
+    ]);
 });
 
 Route::get('userfind', 'UsersController@find');

@@ -9,6 +9,6 @@ class proyecto extends Model
     protected $table = "proyecto";
     
     protected $fillable = [
-        'name','fecha_fin','description','estado',
+        'name','fecha_fin','description','estado','id_equipo',
     ];
 }

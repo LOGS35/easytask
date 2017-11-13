@@ -35,6 +35,7 @@
                     <th>Apellidos</th>
                     <th>Puesto</th>
                     <th>Correo</th>
+                    <th>Fecha de creación</th>
                     <th>Acción</th>
                 </tr>
                 </thead>

@@ -38,6 +38,9 @@ class ObjectResponseController extends Controller
                     return '<a href="'.route("users.show", $user->id).'" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a>';
                 }   
             })
+            ->editColumn('created_at', function ($user) {
+                return date('d/m/Y', strtotime($user->created_at));
+            })
                           //->addColumn('action', 'eloquent.tables.users-action')
             ->rawColumns(['type', 'action'])
             ->make(true);
@@ -93,13 +96,13 @@ class ObjectResponseController extends Controller
             ->editColumn('estado', function ($proyecto) {
                 if ($proyecto->estado == "En proceso") {
                     return '<span class="badge badge-info">' . $proyecto->estado . '</span>';
-                } else if ($equipo->estado == "En revisión") {
+                } else if ($proyecto->estado == "En revisión") {
                   return '<span class="badge badge-primary">' . $proyecto->estado . '</span>';
-                } else if ($equipo->estado == "Incompleto") {
+                } else if ($proyecto->estado == "Incompleto") {
                   return '<span class="badge badge-warning">' . $proyecto->estado . '</span>';
-                } else if ($equipo->estado == "Detenido") {
+                } else if ($proyecto->estado == "Detenido") {
                   return '<span class="badge badge-danger">' . $proyecto->estado . '</span>';
-                } else if ($equipo->estado == "Terminado") {
+                } else if ($proyecto->estado == "Terminado") {
                   return '<span class="badge badge-success">' . $proyecto->estado . '</span>';
                 }
             })

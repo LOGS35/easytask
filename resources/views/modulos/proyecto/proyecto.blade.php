@@ -98,13 +98,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro que desea eliminar este equipo?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro que desea eliminar este proyecto?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Todos los miembros de ese equipo se quedaran fuera del equipo.
+        El proyecto se eliminará completamente de la base de datos
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

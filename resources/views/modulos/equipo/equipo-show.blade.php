@@ -52,7 +52,7 @@
       @endif
       <!-- Table equipo -->
       <!-- Example DataTables Card-->
-      <div class="card mb-3-equip">
+      <div class="card">
         <div class="card-header">
           <i class="fa fa-fw fa-users" aria-hidden="true"></i>Integrantes</div>
         <div class="card-body">
@@ -107,6 +107,40 @@
           $users->render()-->
         </div>
       </div>
+      <!-- Proyectos -->
+      <div class="row mt-3 mb-3-equip">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Proyectos actuales
+                <i class="fa fa-fw fa-folder-open" aria-hidden="true"></i>
+                </div>
+                <div class="card-body">
+                   <div class="row">
+                    @foreach($proyecto as $proyecto) 
+                           @if($proyecto->estado != 'Terminado')
+                            <div class="col-md-4">                               
+                                <div class="card">
+                                    <div class="card-header">{{ $proyecto->name }}</div>
+                                    <div class="card-body">
+                                        <span class="badge badge-info">Descripción:</span> {{ $proyecto->description }}
+                                        <div class="dropdown-divider"></div>
+                                        <span class="badge badge-success">Estado:</span>{{ $proyecto->estado }}
+                                        <div class="dropdown-divider"></div>
+                                        <a href="{{ route('proyecto.show',$proyecto->id) }}" class="btn btn-success">Ver proyecto<i class="fa fa-eye fa-fw" aria-hidden="true"></i></a>
+                                    </div>
+                                    <div class="card-footer">
+                                        Proyecto creado: {{ $proyecto->created_at }}
+                                    </div>
+                                </div>
+                       </div>
+                       @endif
+                    @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin proyectos -->
     </div>
     <!-- /.container-fluid-->
 </div>

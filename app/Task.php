@@ -9,6 +9,6 @@ class task extends Model
     protected $table = "task";
     
     protected $fillable = [
-        'nombre','description','estado','fecha_fin','id_usuario','id_proyecto',
+        'nombre','description','estado','peso','fecha_fin','id_usuario','id_proyecto',
     ];
 }

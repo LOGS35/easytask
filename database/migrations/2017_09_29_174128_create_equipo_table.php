@@ -17,8 +17,6 @@ class CreateEquipoTable extends Migration
             $table->increments('id');
             $table->string('nombre', 30);
             $table->enum('estado', ['Activo', 'Inactivo'])->default('Activo');
-            $table->integer('id_proy')->unsigned()->nullable();
-            $table->foreign('id_proy')->references('id')->on('proyecto')->onDelete('cascade');
             $table->timestamps();
         });
     }
