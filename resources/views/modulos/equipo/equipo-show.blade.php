@@ -33,9 +33,9 @@
                 <div class="estado">
                     <p class="badge badge-info">Fecha de creación: {{ Carbon\Carbon::parse($equipo->created_at)->format('d-m-Y') }}</p>
                 </div>
-                <div class="estado">
+                <!-- <div class="estado">
                     <p class="badge badge-info">Última modificación: {{ Carbon\Carbon::parse($equipo->update_at)->format('d-m-Y') }}</p>
-                </div>
+                </div> -->
           </div>
       </div>
       <!-- Acciones -->
@@ -113,11 +113,20 @@
             <div class="card">
                 <div class="card-header">Proyectos actuales
                 <i class="fa fa-fw fa-folder-open" aria-hidden="true"></i>
+                <div class="combobox" style="float:right">
+                    <select id="proyecto_status" class="form-control">
+                     <option value="" selected="selected">Todos</option>
+                      <option value="Proceso">En proceso</option>
+                        <option value="Terminado">Terminado</option>
+                        <option value="Revisión">En revisión</option>
+                        <option value="Incompleto">Incompleto</option>
+                        <option value="Detenido">Detenido</option>
+                    </select>
                 </div>
-                <div class="card-body">
-                   <div class="row">
+                </div>
+                <div class="card-body" id="cuerpobody">
+                   <div class="row" id="cuerpoajax">
                     @foreach($proyecto as $proyecto) 
-                           @if($proyecto->estado != 'Terminado')
                             <div class="col-md-4">                               
                                 <div class="card">
                                     <div class="card-header">{{ $proyecto->name }}</div>
@@ -133,7 +142,6 @@
                                     </div>
                                 </div>
                        </div>
-                       @endif
                     @endforeach
                     </div>
                 </div>

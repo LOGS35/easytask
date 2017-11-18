@@ -56,6 +56,10 @@ Route::group(['middleware' => 'auth'], function(){
         'uses' => 'EquipController@show',
         'as' => 'equipo.show'
     ]);
+   /* Route::post('equipo/findp', [
+        'uses' => 'EquipController@buscar',
+        'as' => 'equipo.findp'
+    ]);*/
 });
 
 Route::group(['middleware' => 'auth'], function(){

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use EasyTask\Http\Controllers\Controller;
 use EasyTask\User;
 use EasyTask\Equipo;
+use EasyTask\Proyecto;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 //use EasyTask\Http\Controllers\Flash;
@@ -117,7 +118,7 @@ class EquipController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         //
         $user = DB::table('users')
@@ -126,7 +127,7 @@ class EquipController extends Controller
             ->where('equipo.id',$id)
             ->get();
         $equipoactual = Equipo::find($id);
-        $proyectos = DB::table('proyecto')
+        $proyectos = Proyecto::estado($request->estado)
             ->where('id_equipo',$id)
             ->get();
         //dd($equipo);
@@ -241,4 +242,12 @@ class EquipController extends Controller
         $user->save();
         return back()->with('status', 'El usuario "'.$user->name.'" fue expulsado del equipo');
     }
+    /*public function buscar(Request $request) {
+        $proyectos = Proyecto::estado($request->estado)
+            ->where('id_equipo',$request->id)
+            ->get();
+        //dd($equipo);
+            //->paginate(10000);
+        return view('modulos.equipo.equipo-show', ['users' => $user, 'equipo' => $equipoactual, 'proyecto' => $proyectos]);
+    }*/
 }

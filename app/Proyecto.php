@@ -11,4 +11,8 @@ class proyecto extends Model
     protected $fillable = [
         'name','fecha_fin','description','estado','id_equipo',
     ];
+    
+    public function scopeEstado($query, $estado) {
+        $query->where('estado', 'LIKE', "%$estado%");
+    }
 }

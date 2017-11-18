@@ -115,7 +115,7 @@
                 <div class="card-body">
                    <div class="row">
                     @foreach($proyecto as $proyecto) 
-                           @if($proyecto->estado != 'Terminado')
+                           @if($proyecto->estado == 'En proceso')
                             <div class="col-md-4">                               
                                 <div class="card">
                                     <div class="card-header">{{ $proyecto->name }}</div>

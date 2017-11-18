@@ -32,4 +32,10 @@ $(document).ready(function () {
     $(document).on('click', '.card-body',function (e) {
         $('label select').removeAttr("disabled");
     });
+    $('#proyecto_status').on('change', function(e) {
+        $estado = $(this).val();
+        $('#cuerpobody').load('?estado='+$estado+' #cuerpoajax');
+        
+        //console.log($(this).val());
+    });
 });
