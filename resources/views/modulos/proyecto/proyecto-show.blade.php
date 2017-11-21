@@ -16,7 +16,7 @@
       <!-- Info -->
       <div class="card mb-3">
           <div class="card-header">
-              <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Información del equipo
+              <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Información del proyecto
           </div>
           <div class="card-body">
                 <div class="estado">
@@ -28,65 +28,118 @@
                 <div class="estado">
                     <p class="badge badge-info">Fecha de creación: {{ Carbon\Carbon::parse($proyecto->created_at)->format('d-m-Y') }}</p>
                 </div>
+                @if ($proyecto->fecha_fin != null)
+                    <div class="estado">
+                        <p class="badge badge-info">Fecha de finalización: {{ Carbon\Carbon::parse($proyecto->fecha_fin)->format('d-m-Y') }}</p>
+                    </div>
+                @endif
           </div>
       </div>
+      <div class="descripcion mb-3">
+            <div class="card">
+               <div class="card-header">
+                   <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Descripción del proyecto
+               </div>
+               <div class="card-body">
+                   {{ $proyecto->description }}
+               </div>
+            </div>
+        </div>
       <!-- Acciones -->
       @if (Auth::user()->type == "Scrum Master")
           <div class="card mb-3">
               <div class="card-header">
-                  <i class="fa fa-cog fa-fw" aria-hidden="true"></i>Acciones para el equipo: {{ $proyecto->name }}
+                  <i class="fa fa-cog fa-fw" aria-hidden="true"></i>Acciones para el proyecto: {{ $proyecto->name }}
               </div>
               <div class="card-body">
-                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#editeam">Editar equipo<i class="fa fa-pencil fa-fw" aria-hidden="true"></i></a>
-                    <a href="#" data-toggle="modal" data-target="#eliteam" class="btn btn-danger">Desactivar equipo <i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#editeam">Editar proyecto<i class="fa fa-pencil fa-fw" aria-hidden="true"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#eliteam" class="btn btn-danger">Eliminar proyecto <i class="fa fa-trash" aria-hidden="true"></i></a>
               </div> 
           </div>
       @endif
       <!-- Table equipo -->
-      <!-- Example DataTables Card-->
-      <div class="card mb-3-equip">
-        <div class="card-header">
-          <i class="fa fa-fw fa-users" aria-hidden="true"></i>Integrantes</div>
-        <div class="card-body">
-         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Puesto</th>
-                  <th>Correo</th>
-                  <th>Fecha de creación</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <!--<tfoot>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Integrantes</th>
-                  <th>Estado</th>
-                  <th>Fecha de creación</th>
-                  <th>Acción</th>
-                </tr>
-              </tfoot>-->
-              <tbody>
-                
-              </tbody>
-            </table>
+      <div class="card mb-3">
+          <div class="card-header">
+              Tareas
           </div>
-          <!--$users->links() 
-          $users->render()-->
-        </div>
+          <div class="card-body">
+              <div class="drag-container">
+	<ul class="drag-list">
+		<li class="drag-column drag-column-on-hold">
+			<span class="drag-column-header">
+				<h2>Pendiente</h2>
+			</span>
+				
+			<div class="drag-options" id="options1"></div>
+			
+			<ul class="drag-inner-list" id="pendiente">
+				<li class="drag-item"></li>
+				<li class="drag-item"></li>
+			</ul>
+		</li>
+		<!--{!! $s = 1 !!}-->
+		@foreach ($users as $users)
+		<li class="drag-column drag-column-in-progress" style="background-color:{{ sprintf('#%06X', mt_rand(0, 0xFFFFFF)) }}">
+			<span class="drag-column-header">
+				<h2>{{ $users->name }}</h2>
+			</span>
+			<div class="drag-options" id="options2"></div>
+			<ul class="drag-inner-list" id="{{ $s++ }}">
+				<li class="drag-item"></li>
+				<li class="drag-item"></li>
+				<li class="drag-item"></li>
+			</ul>
+		</li>
+		@endforeach
+		<li class="drag-column drag-column-needs-review">
+			<span class="drag-column-header">
+				<h2>Necesita revisión</h2>
+			</span>
+			<div class="drag-options" id="options3"></div>
+			<ul class="drag-inner-list" id="revision">
+				<li class="drag-item"></li>
+				<li class="drag-item"></li>
+				<li class="drag-item"></li>
+				<li class="drag-item"></li>
+			</ul>
+		</li>
+		<li class="drag-column drag-column-approved">
+			<span class="drag-column-header">
+				<h2>Aprobado</h2>
+			</span>
+			<div class="drag-options" id="options4"></div>
+			<ul class="drag-inner-list" id="aprobado">
+				<li class="drag-item"></li>
+				<li class="drag-item"></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+          </div>
       </div>
+      <!-- Example DataTables Card-->
+      <!-- Commentarios -->
+      <div class="card mb-3-equip">
+          <div class="card-header">
+              Comentarios del proyecto
+          </div>
+          <div class="card-body">
+              @foreach ($comentarios_proyecto as $comments)
+                  
+              @endforeach
+          </div>
+      </div>
+      <!-- endcomentarios -->
+      
     </div>
     <!-- /.container-fluid-->
 </div>
     <!-- Modal -->
-<div class="modal fade bd-example-modal-lg" id="editeam" tabindex="-1" role="dialog" aria-labelledby="crearteam" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="editeam" role="dialog" aria-labelledby="crearteam" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="crearteam">Crear equipo</h5>
+        <h5 class="modal-title" id="crearteam">Editar proyecto</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -95,9 +148,23 @@
         {!! Form::open(['route' => ['proyecto.update', $proyecto->id], 'method' => 'PUT']) !!}
         <div class="form-group">
             <div class="form-row">
-              <div class="col-md-12">
-               {!! Form::label('nombre', 'Nombre') !!}
-               {!! Form::text('nombre', $proyecto->name, ['class' => 'form-control', 'placeholder' => 'Nombre', 'required']) !!}
+              <div class="col-md-6">
+               {!! Form::label('name', 'Nombre') !!}
+               {!! Form::text('name', $proyecto->name, ['class' => 'form-control', 'placeholder' => 'Nombre', 'required']) !!}
+              </div>
+              <div class="col-md-6">
+               {!! Form::label('estado', 'Estado') !!}
+               @if ($proyecto->estado == 'En proceso')
+                   {!! Form::select('estado', ['En proceso' => 'En proceso', 'En revisión' => 'En revisión', 'Incompleto' => 'Incompleto', 'Detenido' => 'Detenido', 'Terminado' => 'Terminado'], null, ['class' => 'form-control', 'required']) !!}
+               @elseif ($proyecto->estado == 'En revisión')
+                   {!! Form::select('estado', ['En revisión' => 'En revisión', 'En proceso' => 'En proceso', 'Incompleto' => 'Incompleto', 'Detenido' => 'Detenido', 'Terminado' => 'Terminado'], null, ['class' => 'form-control', 'required']) !!}
+               @elseif ($proyecto->estado == 'Incompleto')
+                   {!! Form::select('estado', ['Incompleto' => 'Incompleto', 'En proceso' => 'En proceso', 'En revisión' => 'En revisión', 'Detenido' => 'Detenido', 'Terminado' => 'Terminado'], null, ['class' => 'form-control', 'required']) !!}
+               @elseif ($proyecto->estado == 'Detenido')
+                   {!! Form::select('estado', ['Detenido' => 'Detenido', 'En proceso' => 'En proceso', 'En revisión' => 'En revisión', 'Incompleto' => 'Incompleto', 'Terminado' => 'Terminado'], null, ['class' => 'form-control', 'required']) !!}
+               @elseif ($proyecto->estado == 'Terminado')
+                   {!! Form::select('estado', ['Terminado' => 'Terminado', 'En proceso' => 'En proceso', 'En revisión' => 'En revisión', 'Incompleto' => 'Incompleto', 'Detenido' => 'Detenido'], null, ['class' => 'form-control', 'required']) !!}
+                @endif
               </div>
               <!--<div class="col-md-6">
                {!! Form::label('estado', 'Estado') !!}
@@ -106,8 +173,8 @@
             </div>
         </div>
         <div class="form-group">
-                {!! Form::label('usuarios', 'Agregar integrante') !!}
-                <select class="js-example-theme-multiple form-control" name="user[]" multiple="multiple"></select>
+            {!! Form::label('description', 'Descripción') !!}
+            {!! Form::textarea('description', $proyecto->description, ['size' => '5x5','class' => 'form-control', 'placeholder' => 'Descripción', 'required']) !!}
         </div>
       </div>
       <div class="modal-footer">
@@ -123,17 +190,17 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro que desea desactivar el equipo?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro que desea eliminar el proyecto?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        El equipo {{ $proyecto->nombre }} pasara a modo "inactivo" y todos los miembros del equipo serán expulsados
+        El proyecto {{ $proyecto->nombre }} y todo lo relacionado con este se eliminará
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <a href="{{ route('proyecto.destroy', $proyecto->id) }}" class="btn btn-primary">Desactivar equipo</a>
+        <a href="{{ route('proyecto.destroy', $proyecto->id) }}" class="btn btn-primary">Eliminar</a>
       </div>
     </div>
   </div>
@@ -143,17 +210,17 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro que desea expulsar a esta persona del equipo?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">¿Esta seguro que desea eliminar la tarea?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        El miembro se quedara fuera del equipo
+        La tarea se eliminará de forma permanente
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-primary">Expulsar</a>
+        <a class="btn btn-primary">Eliminar</a>
       </div>
     </div>
   </div>

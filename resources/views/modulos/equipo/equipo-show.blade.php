@@ -128,10 +128,10 @@
                    <div class="row" id="cuerpoajax">
                     @foreach($proyecto as $proyecto) 
                             <div class="col-md-4">                               
-                                <div class="card">
+                                <div class="card mb-3">
                                     <div class="card-header">{{ $proyecto->name }}</div>
                                     <div class="card-body">
-                                        <span class="badge badge-info">Descripción:</span> {{ $proyecto->description }}
+                                        <span class="badge badge-info">Descripción:</span> {{ str_limit($proyecto->description, 80) }}
                                         <div class="dropdown-divider"></div>
                                         <span class="badge badge-success">Estado:</span>{{ $proyecto->estado }}
                                         <div class="dropdown-divider"></div>
@@ -157,7 +157,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="crearteam">Crear equipo</h5>
+        <h5 class="modal-title" id="crearteam">Modificar equipo</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

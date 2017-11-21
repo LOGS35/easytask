@@ -109,6 +109,9 @@ class ObjectResponseController extends Controller
             ->editColumn('created_at', function ($proyecto) {
                 return date('d/m/Y', strtotime($proyecto->created_at));
             })
+            ->editColumn('description', function($proyecto) {
+                return str_limit($proyecto->description, 40);
+            })
             ->rawColumns(['estado', 'action'])
             ->make(true);
     }

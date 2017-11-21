@@ -17,7 +17,7 @@ class CreateProyectoTable extends Migration
             $table->increments('id');
             $table->string('name', 20);
             $table->dateTime('fecha_fin')->nullable();
-            $table->string('description', 100);
+            $table->string('description', 300);
             $table->enum('estado', ['En proceso', 'En revisión','Incompleto','Detenido','Terminado'])->default('En proceso');
             $table->integer('id_equipo')->unsigned();
             $table->foreign('id_equipo')->references('id')->on('equipo')->onDelete('cascade');

@@ -16,7 +16,7 @@ class CreateTaskTable extends Migration
         Schema::create('task', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre', 30);            
-            $table->string('description', 100);
+            $table->string('description', 300);
             //$table->string('movimiento', 100);
             $table->enum('estado', ['BackLog Proyecto', 'BackLog Usuario','En Proceso'])->default('BackLog Proyecto');
             $table->integer('peso');

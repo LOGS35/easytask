@@ -5,7 +5,7 @@ namespace EasyTask\Http\Controllers;
 use Illuminate\Http\Request;
 use EasyTask\Equipo;
 use EasyTask\Proyecto;
-use EasyTask\Equipo_Proyecto;
+use EasyTask\Task;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -46,7 +46,7 @@ class ProyectoController extends Controller
         $v = Validator::make($request->all(), [
             'name' => 'required|string|max:20',
             'estado' => 'required|string|max:20',
-            'description' => 'required|string|max:100',
+            'description' => 'required|string|max:300',
         ]);
  
         if ($v->fails())
@@ -84,9 +84,28 @@ class ProyectoController extends Controller
     public function show($id)
     {
         $proyecto = Proyecto::find($id);
+        $equipo = DB::table('equipo')
+            ->where('id',$proyecto->id_equipo)
+            ->get();
+        $users = DB::table('users')
+            ->where('id_equip',$proyecto->id_equipo)
+            ->get();
+        $comments = DB::table('comentarios_proyecto')
+            ->join('users', 'comentarios_proyecto.id_user', '=', 'users.id')
+            ->select('users.name','comentarios_proyecto.descripcion','comentarios_proyecto.created_at')
+            ->where('id_proyecto',$proyecto->id)
+            ->get();
+        
+        
+        //dd($equipo);
         //dd($proyecto);
             //->paginate(10000);
-        return view('modulos.proyecto.proyecto-show', ['proyecto' => $proyecto]);
+        return view('modulos.proyecto.proyecto-show', ['proyecto' => $proyecto, 'equipo' => $equipo, 'users' => $users, 'comentarios_proyecto' => $comments]);
+    }
+    
+    public function add_comment(Request $request) 
+    {
+        
     }
 
     /**
@@ -109,7 +128,27 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $proyecto = Proyecto::find($id);
+        $proyecto->name = $request->name;
+        $proyecto->description = $request->description;
+        $proyecto->estado = $request->estado;
+        //dd($equipo);
+        $proyecto->save(); 
+        
+       /* $id_equip = DB::table('equipo')
+                ->select('id')
+                ->where('id',$id)
+                ->get();
+        
+        dd($id_equipo);
+        */
+        //dd($id_equip);
+        
+        /*$user = User::find($request->user[1]);
+        $user->id_equip = $id_equip->id;
+        $user->save();*/
+        
+        return redirect()->back()->with('status', 'El proyecto fue actualizado!'); 
     }
 
     /**
@@ -122,6 +161,6 @@ class ProyectoController extends Controller
     {
         $proyecto = Proyecto::find($id);
         $proyecto->delete();
-        return back()->with('status','El proyecto: '.$proyecto->name.' fue eliminado');
+        return redirect()->route('proyecto.index')->with('status','El proyecto: '.$proyecto->name.' fue eliminado');
     }
 }

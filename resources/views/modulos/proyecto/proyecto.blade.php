@@ -113,4 +113,24 @@
     </div>
   </div>
 </div>
+@if ($errors->has('name') || $errors->has('description') || $errors->has('estado'))
+<div class="alert alert-warning animated fadeInUp">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                                @if ($errors->has('description'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('description') }}</strong>
+                                    </span>
+                                @endif
+                                @if ($errors->has('estado'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('estado') }}</strong>
+                                    </span>
+                                @endif
+</div>
+@endif
 @endsection

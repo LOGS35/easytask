@@ -291,6 +291,9 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/script-action.js') }}"></script>
+    <!-- kanban -->
+    <script src="{{ asset('js/kanban.js') }}"></script>
+    <script src="{{ asset('js/script-kanban.js') }}"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/popper/popper.min.js') }}"></script>
