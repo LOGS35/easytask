@@ -83,7 +83,10 @@ class ProyectoController extends Controller
      */
     public function show($id)
     {
-        //
+        $proyecto = Proyecto::find($id);
+        //dd($proyecto);
+            //->paginate(10000);
+        return view('modulos.proyecto.proyecto-show', ['proyecto' => $proyecto]);
     }
 
     /**

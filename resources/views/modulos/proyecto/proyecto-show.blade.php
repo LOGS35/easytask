@@ -9,9 +9,9 @@
           <a href="{{ route('home') }}">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="{{ route('equipo.index') }}">Equipos</a>
+          <a href="{{ route('proyecto.index') }}">Proyectos</a>
         </li>
-        <li class="breadcrumb-item active">{{ $equipo->nombre }}</li>
+        <li class="breadcrumb-item active">{{ $proyecto->name }}</li>
       </ol>
       <!-- Info -->
       <div class="card mb-3">
@@ -20,21 +20,13 @@
           </div>
           <div class="card-body">
                 <div class="estado">
-                    <p class="badge badge-danger">Nombre: {{ $equipo->nombre }}</p>
+                    <p class="badge badge-danger">Nombre: {{ $proyecto->name }}</p>
                 </div>
                 <div class="estado">
-                    @if ($equipo->estado == "Activo")
-                        <p class="badge badge-success">Estado: {{ $equipo->estado }}</p>
-                    @endif 
-                    @if ($equipo->estado == "Inactivo")
-                      <p class="badge badge-warning">Estado: {{ $equipo->estado }}</p>
-                    @endif 
+                    <p class="badge badge-success">Estado: {{ $proyecto->estado }}</p>
                 </div>
                 <div class="estado">
-                    <p class="badge badge-info">Fecha de creación: {{ Carbon\Carbon::parse($equipo->created_at)->format('d-m-Y') }}</p>
-                </div>
-                <div class="estado">
-                    <p class="badge badge-info">Última modificación: {{ Carbon\Carbon::parse($equipo->update_at)->format('d-m-Y') }}</p>
+                    <p class="badge badge-info">Fecha de creación: {{ Carbon\Carbon::parse($proyecto->created_at)->format('d-m-Y') }}</p>
                 </div>
           </div>
       </div>
@@ -42,7 +34,7 @@
       @if (Auth::user()->type == "Scrum Master")
           <div class="card mb-3">
               <div class="card-header">
-                  <i class="fa fa-cog fa-fw" aria-hidden="true"></i>Acciones para el equipo: {{ $equipo->nombre }}
+                  <i class="fa fa-cog fa-fw" aria-hidden="true"></i>Acciones para el equipo: {{ $proyecto->name }}
               </div>
               <div class="card-body">
                     <a href="#" class="btn btn-success" data-toggle="modal" data-target="#editeam">Editar equipo<i class="fa fa-pencil fa-fw" aria-hidden="true"></i></a>
@@ -78,28 +70,7 @@
                 </tr>
               </tfoot>-->
               <tbody>
-                @foreach($users as $user)
-                    <tr>
-                      <td>{{ $user->name }} {{ $user->lastname }}</td>
-                      <td>
-                         @if ($user->type == "Scrum Master")
-                          <span class="badge badge-danger">{{ $user->type }}</span>
-                         @endif 
-                         @if ($user->type == "Project Owner")
-                          <span class="badge badge-primary">{{ $user->type }}</span>
-                         @endif 
-                         @if ($user->type == "Developer")
-                          <span class="badge badge-info">{{ $user->type }}</span>
-                         @endif 
-                      </td>
-                      <td>{{ $user->email }}</td>
-                      <td>{{ Carbon\Carbon::parse($user->created_at)->format('d-m-Y') }}</td>
-                      <td> @if (Auth::user()->type == "Scrum Master")
-                           <a data-href="{{ route('equipo.expulsar', $user->id) }}" class="badge badge-danger"><i class="fa fa-user-times" aria-hidden="true"></i></a>
-                          @endif 
-                       <a href="{{ route('users.show', $user->id) }}" class="badge badge-success"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
-                    </tr>
-                @endforeach
+                
               </tbody>
             </table>
           </div>
@@ -121,12 +92,12 @@
         </button>
       </div>
       <div class="modal-body">
-        {!! Form::open(['route' => ['equipo.update', $equipo->id], 'method' => 'PUT']) !!}
+        {!! Form::open(['route' => ['proyecto.update', $proyecto->id], 'method' => 'PUT']) !!}
         <div class="form-group">
             <div class="form-row">
               <div class="col-md-12">
                {!! Form::label('nombre', 'Nombre') !!}
-               {!! Form::text('nombre', $equipo->nombre, ['class' => 'form-control', 'placeholder' => 'Nombre', 'required']) !!}
+               {!! Form::text('nombre', $proyecto->name, ['class' => 'form-control', 'placeholder' => 'Nombre', 'required']) !!}
               </div>
               <!--<div class="col-md-6">
                {!! Form::label('estado', 'Estado') !!}
@@ -158,11 +129,11 @@
         </button>
       </div>
       <div class="modal-body">
-        El equipo {{ $equipo->nombre }} pasara a modo "inactivo" y todos los miembros del equipo serán expulsados
+        El equipo {{ $proyecto->nombre }} pasara a modo "inactivo" y todos los miembros del equipo serán expulsados
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <a href="{{ route('equipo.destroy', $equipo->id) }}" class="btn btn-primary">Desactivar equipo</a>
+        <a href="{{ route('proyecto.destroy', $proyecto->id) }}" class="btn btn-primary">Desactivar equipo</a>
       </div>
     </div>
   </div>
