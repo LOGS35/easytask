@@ -53,14 +53,15 @@
               </div>
               <div class="card-body">
                     <a href="#" class="btn btn-success" data-toggle="modal" data-target="#editeam">Editar proyecto<i class="fa fa-pencil fa-fw" aria-hidden="true"></i></a>
-                    <a href="#" data-toggle="modal" data-target="#eliteam" class="btn btn-danger">Eliminar proyecto <i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#eliteam" class="btn btn-danger">Eliminar proyecto <i class="fa fa-trash fa-fw" aria-hidden="true"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#taskadd" class="btn btn-info">Crear tarea<i class="fa fa-fw fa-list"></i></a>
               </div> 
           </div>
       @endif
       <!-- Table equipo -->
       <div class="card mb-3">
           <div class="card-header">
-              Tareas
+              <i class="fa fa-fw fa-list"></i>Tareas
           </div>
           <div class="card-body">
               <div class="drag-container">
@@ -121,12 +122,43 @@
       <!-- Commentarios -->
       <div class="card mb-3-equip">
           <div class="card-header">
-              Comentarios del proyecto
+              <i class="fa fa-fw fa-list"></i>Comentarios del proyecto
           </div>
           <div class="card-body">
+              <div class="old" id="old_comments">
+              <div id="coment-ajax">
               @foreach ($comentarios_proyecto as $comments)
-                  
+                     @if (Auth::user()->id == $comments->id)
+                     <div class="coment">
+                      <div class="texto">{{ $comments->descripcion }}</div>
+                      <div class="user"> : <span class="badge badge-success">{{ $comments->name }}</span></div>
+                      <div class="date">{{ $comments->created_at }}</div>
+                      </div>
+                      @else
+                      <div class="coment2">
+                      <div class="user"><span class="badge badge-warning">{{ $comments->name }}</span> : </div>
+                          <div class="texto">{{ $comments->descripcion }}</div>
+                          <div class="date">{{ $comments->created_at }}</div>
+                      </div>
+                      @endif
               @endforeach
+                  </div>
+              </div>
+              <div class="new" id="resultado_comments">
+                  
+              </div>
+          </div>
+          <div class="card-footer">
+             <div class="form-group">
+             <div class="form-row">
+                 <div class="col-md-10">
+                     <input type="text" class="form-control" id="message">
+                 </div>
+                 <div class="col-md-2">
+                     <button class="btn btn-success form-control" id="submit-comment" data-id_user="{{ Auth::user()->id }}" data-id_proy="{{ $proyecto->id }}">Enviar</button>  
+                 </div>
+             </div>
+              </div>
           </div>
       </div>
       <!-- endcomentarios -->

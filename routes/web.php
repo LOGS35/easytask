@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use EasyTask\Comentario_proyecto;
 
 Route::get('welcome', function () {
     return view('welcome');
@@ -84,6 +85,20 @@ Route::group(['middleware' => 'auth'], function(){
         'uses' => 'ProyectoController@destroy',
         'as' => 'proyecto.destroy'
     ]);
+    /*Route::get('proyecto/add_comments', [
+        'uses' => 'ProyectoController@add_comment',
+        'as' => 'proyecto.add_comments'
+    ]);*/
+});
+
+Route::get('comments/add_comments_proyect', function(Illuminate\Http\Request $request)
+{
+    $comment = new Comentario_proyecto();
+    $comment->descripcion = $request->comentario;
+    $comment->id_proyecto = $request->id_proy;
+    $comment->id_user = $request->id_user;
+    $comment->save(); 
+    return '<p>'.$comment->descripcion.'</p>';
 });
 
 Route::get('userfind', 'UsersController@find');

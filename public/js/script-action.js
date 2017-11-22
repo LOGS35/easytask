@@ -38,4 +38,37 @@ $(document).ready(function () {
         
         //console.log($(this).val());
     });
+    /* comentarios */
+    $('input#message').keyup(function(e){
+        if(e.keyCode == 13)
+        {
+            $('#submit-comment').focus();
+        }
+    });
+    
+    $('#submit-comment').on('click', function(e) {
+        $pathname = window.location.pathname;
+        //$('#resultado_comments p').appendTo('#old_comments');
+        var parametros = {
+                "comentario" : $('input#message').val(),
+                "id_user" : $(this).data('id_user'),
+                "id_proy" : $(this).data('id_proy')
+        };
+        $.ajax({
+              data:  parametros, //datos que se envian a traves de ajax
+              url:   '/comments/add_comments_proyect', //archivo que recibe la peticion
+              type:  'get', //método de envio
+              beforeSend: function () {
+                //$("#resultado_comments").html("Procesando, espere por favor...");
+              },
+              success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                //$("#resultado_comments").html(response);
+                  //console.log(response);
+                  $('#old_comments').load($pathname+' #coment-ajax');
+                  $('input#message').val('');
+                  $('input#message').focus();
+              }
+            });
+        //$('#resultado_comments').load('/comments/add_comments_proyect #resultado_comments');
+    });
 });

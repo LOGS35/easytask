@@ -92,7 +92,7 @@ class ProyectoController extends Controller
             ->get();
         $comments = DB::table('comentarios_proyecto')
             ->join('users', 'comentarios_proyecto.id_user', '=', 'users.id')
-            ->select('users.name','comentarios_proyecto.descripcion','comentarios_proyecto.created_at')
+            ->select('users.id','users.name','comentarios_proyecto.descripcion','comentarios_proyecto.created_at')
             ->where('id_proyecto',$proyecto->id)
             ->get();
         
@@ -103,10 +103,15 @@ class ProyectoController extends Controller
         return view('modulos.proyecto.proyecto-show', ['proyecto' => $proyecto, 'equipo' => $equipo, 'users' => $users, 'comentarios_proyecto' => $comments]);
     }
     
-    public function add_comment(Request $request) 
+    /*public function add_comment(Request $request, $id) 
     {
-        
-    }
+        if($request->ajax()) {
+            return response()->json([
+                'total' => 'aqui',
+                'message' => 'shop'
+            ]);
+        }
+    }*/
 
     /**
      * Show the form for editing the specified resource.

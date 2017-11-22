@@ -304,3 +304,70 @@ ul {
 .section h4 a {
   font-weight: 600;
 }
+
+.coment {
+    padding: 1rem;
+    /* background-color: #fff; */
+    display: block;
+    background-color: rgba(0,0,0,0.1);
+    /* vertical-align: top; */
+    border-radius: 0.1875rem;
+    margin-bottom: 1em;
+    /* max-width: 70%; */
+    width: 70%;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+    /* text-align: left; */
+    /* float: right; */
+    float: right;
+    text-align: right;
+    position: relative;
+}
+
+.coment .user, .coment2 .user {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.coment .texto, .coment2 .texto {
+    display: inline-block;
+    margin: 0;
+    font-weight: 500;
+}
+
+.coment2 {
+    padding: 1rem;
+    /* background-color: #fff; */
+    display: block;
+    background-color: rgba(0,0,0,0.1);
+    /* vertical-align: top; */
+    border-radius: 0.1875rem;
+    margin-bottom: 1em;
+    /* max-width: 70%; */
+    width: 70%;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+    /* text-align: left; */
+    /* float: right; */
+    float: left;
+    position: relative;
+}
+
+.coment .date {
+    display: block;
+    float: left;
+    opacity: .6;
+    margin: 0 5px;
+}
+
+.coment2 .date {
+    display: block;
+    float: right;
+    opacity: .6;
+    margin: 0 5px;
+}
+
+@media (max-width: 690px) {
+  .coment, .coment2 {
+    display: block;
+      width: 100%;
+  }
+}

@@ -87,7 +87,7 @@
                 </li>
               </ul>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tareas">
+          <!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tareas">
               <a class="nav-link nav-link-collapse collapsed dropdown" href="#collapseTask" data-target="#collapseTask">
                 <i class="fa fa-fw fa-list"></i>
                 <span class="nav-link-text">Tareas</span>
@@ -100,7 +100,7 @@
                   <a href="">Todas las tareas</a>
                 </li>
               </ul>
-          </li>
+          </li>-->
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Noticias">
               <a class="nav-link nav-link-collapse collapsed dropdown" href="#collapsenews" data-target="#collapsenews">
                 <i class="fa fa-fw fa-newspaper-o"></i>
