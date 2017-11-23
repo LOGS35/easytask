@@ -66,9 +66,15 @@ $(document).ready(function () {
                   //console.log(response);
                   $('#old_comments').load($pathname+' #coment-ajax');
                   $('input#message').val('');
+                  //$('#content-message').scrollTop(9999);
                   $('input#message').focus();
               }
             });
         //$('#resultado_comments').load('/comments/add_comments_proyect #resultado_comments');
     });
+    //$('#content-message').scrollTop(9999);
+    setTimeout(function () {
+        $('.alert.alert-success.animated.fadeInUp').removeClass('fadeInUp').addClass('fadeOutUp');
+    }, 5000);
+    
 });

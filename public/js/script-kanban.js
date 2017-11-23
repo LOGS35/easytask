@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
 dragula([
 	document.getElementById('pendiente'),
 	document.getElementById('revision'),
@@ -30,6 +31,14 @@ dragula([
 			el.classList.remove('is-moved');
 		}, 600);
 	}, 100);
+    //el.classList.add('aqui');
+    var parametros = {
+        "id_task" : el.dataset.id_task,
+        "id_user" : 'asd',
+        "id_proy" : 'dsa'
+    };
+    console.log(parametros);
+    //id_task
 });
 
 });

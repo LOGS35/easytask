@@ -10,17 +10,7 @@
         </li>
         <li class="breadcrumb-item active">Usuarios</li>
       </ol>
-      <!-- Acciones -->
-      @if (Auth::user()->type == "Scrum Master")
-          <div class="card mb-3">
-              <div class="card-header">
-                  <i class="fa fa-cog fa-fw" aria-hidden="true"></i>Acciones
-              </div>
-              <div class="card-body">
-                    
-              </div> 
-          </div>
-      @endif
+      
       <!-- Table equipo -->
       <!-- Example DataTables Card-->
       <div class="card mb-3-equip">

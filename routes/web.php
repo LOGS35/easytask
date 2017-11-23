@@ -91,6 +91,14 @@ Route::group(['middleware' => 'auth'], function(){
     ]);*/
 });
 
+Route::group(['middleware' => 'auth'], function(){
+    Route::resource('task','TaskController');
+    Route::get('task/{id}/destroy', [
+        'uses' => 'TaskController@destroy',
+        'as' => 'task.destroy'
+    ]);
+});
+
 Route::get('comments/add_comments_proyect', function(Illuminate\Http\Request $request)
 {
     $comment = new Comentario_proyecto();

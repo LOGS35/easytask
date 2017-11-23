@@ -15,7 +15,7 @@ class CreateProyectoTable extends Migration
     {
         Schema::create('proyecto', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 20);
+            $table->string('name', 50);
             $table->dateTime('fecha_fin')->nullable();
             $table->string('description', 300);
             $table->enum('estado', ['En proceso', 'En revisión','Incompleto','Detenido','Terminado'])->default('En proceso');

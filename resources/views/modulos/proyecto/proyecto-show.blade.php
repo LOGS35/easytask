@@ -59,6 +59,7 @@
           </div>
       @endif
       <!-- Table equipo -->
+      
       <div class="card mb-3">
           <div class="card-header">
               <i class="fa fa-fw fa-list"></i>Tareas
@@ -74,21 +75,30 @@
 			<div class="drag-options" id="options1"></div>
 			
 			<ul class="drag-inner-list" id="pendiente">
-				<li class="drag-item"></li>
-				<li class="drag-item"></li>
+			@foreach ($task as $task)
+				<li class="drag-item" task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}">
+				    <div class="name">{{ $task->nombre }}</div>
+                    <div class="weight">{{ $task->peso }}</div>
+				</li>
+            @endforeach
 			</ul>
 		</li>
 		<!--{!! $s = 1 !!}-->
 		@foreach ($users as $users)
-		<li class="drag-column drag-column-in-progress" style="background-color:{{ sprintf('#%06X', mt_rand(0, 0xFFFFFF)) }}">
+		<li class="drag-column drag-column-in-progress">
 			<span class="drag-column-header">
-				<h2>{{ $users->name }}</h2>
+				<h2>{{ $users->name.' '.$users->lastname }}</h2>
 			</span>
 			<div class="drag-options" id="options2"></div>
-			<ul class="drag-inner-list" id="{{ $s++ }}">
-				<li class="drag-item"></li>
-				<li class="drag-item"></li>
-				<li class="drag-item"></li>
+			<ul class="drag-inner-list users-columns" id="{{ $s++ }}">
+		    @foreach ($taskuser as $task)
+                @if ($users->id == $task->id_usuario)
+                    <li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="{{ $users->id }}">
+                        <div class="name">{{ $task->nombre }}</div>
+                        <div class="weight">{{ $task->peso }}</div>
+                    </li>
+                @endif
+		    @endforeach
 			</ul>
 		</li>
 		@endforeach
@@ -98,10 +108,12 @@
 			</span>
 			<div class="drag-options" id="options3"></div>
 			<ul class="drag-inner-list" id="revision">
-				<li class="drag-item"></li>
-				<li class="drag-item"></li>
-				<li class="drag-item"></li>
-				<li class="drag-item"></li>
+			    @foreach ($taskrevision as $task)
+				<li class="drag-item" task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}">
+				    <div class="name">{{ $task->nombre }}</div>
+                    <div class="weight">{{ $task->peso }}</div>
+				</li>
+            @endforeach
 			</ul>
 		</li>
 		<li class="drag-column drag-column-approved">
@@ -110,8 +122,12 @@
 			</span>
 			<div class="drag-options" id="options4"></div>
 			<ul class="drag-inner-list" id="aprobado">
-				<li class="drag-item"></li>
-				<li class="drag-item"></li>
+			    @foreach ($taskcomplete as $task)
+				<li class="drag-item" task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}">
+				    <div class="name">{{ $task->nombre }}</div>
+                    <div class="weight">{{ $task->peso }}</div>
+				</li>
+            @endforeach
 			</ul>
 		</li>
 	</ul>
@@ -122,9 +138,9 @@
       <!-- Commentarios -->
       <div class="card mb-3-equip">
           <div class="card-header">
-              <i class="fa fa-fw fa-list"></i>Comentarios del proyecto
+              <i class="fa fa-comments fa-fw" aria-hidden="true"></i>Comentarios del proyecto
           </div>
-          <div class="card-body">
+          <div class="card-body" id="content-message">
               <div class="old" id="old_comments">
               <div id="coment-ajax">
               @foreach ($comentarios_proyecto as $comments)
@@ -253,6 +269,48 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <a class="btn btn-primary">Eliminar</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal add task -->
+<div class="modal fade bd-example-modal-lg" id="taskadd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear tareas para el proyecto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {!! Form::open(['route' => 'task.store', 'method' => 'POST']) !!}
+        <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+               {!! Form::label('nombre', 'Título') !!}
+               {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre', 'required']) !!}
+              </div>
+              <div class="col-md-6">
+               {!! Form::label('peso', 'Peso') !!}
+               {!! Form::select('peso', ['1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'], null, ['class' => 'form-control', 'placeholder' => 'Seleccione', 'required']) !!}
+              </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-12">
+               {!! Form::label('description', 'Descripción') !!}
+               {!! Form::textarea('description', null, ['size' => '5x5','class' => 'form-control', 'placeholder' => 'Descripción', 'required']) !!}
+               <div class="hidden">{!! Form::text('id_proyecto', $proyecto->id, ['class' => 'form-control', 'placeholder' => 'Id proyecto', 'required']) !!}</div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Crear tarea</button>
+        {!! Form::close() !!}
       </div>
     </div>
   </div>

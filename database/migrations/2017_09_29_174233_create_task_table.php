@@ -15,10 +15,10 @@ class CreateTaskTable extends Migration
     {
         Schema::create('task', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre', 30);            
+            $table->string('nombre', 50);            
             $table->string('description', 300);
             //$table->string('movimiento', 100);
-            $table->enum('estado', ['BackLog Proyecto', 'BackLog Usuario','En Proceso'])->default('BackLog Proyecto');
+            $table->enum('estado', ['BackLog Proyecto', 'BackLog Usuario','BackLog Revision','BackLog Aprobado'])->default('BackLog Proyecto');
             $table->integer('peso');
             $table->dateTime('fecha_fin')->nullable();
             $table->integer('id_usuario')->unsigned()->nullable();

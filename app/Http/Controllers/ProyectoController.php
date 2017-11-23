@@ -44,7 +44,7 @@ class ProyectoController extends Controller
     public function store(Request $request)
     {
         $v = Validator::make($request->all(), [
-            'name' => 'required|string|max:20',
+            'name' => 'required|string|max:50',
             'estado' => 'required|string|max:20',
             'description' => 'required|string|max:300',
         ]);
@@ -95,12 +95,30 @@ class ProyectoController extends Controller
             ->select('users.id','users.name','comentarios_proyecto.descripcion','comentarios_proyecto.created_at')
             ->where('id_proyecto',$proyecto->id)
             ->get();
-        
+        $taskuser = DB::table('task')
+            /*->join('users', 'task.id_usuario', '=', 'users.id')
+            ->select('task.id','task.nombre','task.description','task.peso','users.id','users.name','users.lastname')*/
+            ->where([['id_proyecto',$id],['estado','=','BackLog Usuario'],])
+            ->orderBy('peso', 'desc')
+            ->get();
+        $task = DB::table('task')
+            ->where([['id_proyecto',$id],['estado','=','BackLog Proyecto'],])
+            ->orderBy('peso', 'desc')
+            ->get();
+        $taskrevision = DB::table('task')
+            ->where([['id_proyecto',$id],['estado','=','BackLog Revision'],])
+            ->orderBy('peso', 'desc')
+            ->get();
+        $taskcomplete = DB::table('task')
+            ->where([['id_proyecto',$id],['estado','=','BackLog Aprobado'],])
+            ->orderBy('peso', 'desc')
+            ->get();
+        //dd($task);
         
         //dd($equipo);
         //dd($proyecto);
             //->paginate(10000);
-        return view('modulos.proyecto.proyecto-show', ['proyecto' => $proyecto, 'equipo' => $equipo, 'users' => $users, 'comentarios_proyecto' => $comments]);
+        return view('modulos.proyecto.proyecto-show', ['proyecto' => $proyecto, 'equipo' => $equipo, 'comentarios_proyecto' => $comments, 'task' => $task, 'taskuser' => $taskuser, 'users' => $users, 'taskrevision' => $taskrevision, 'taskcomplete' => $taskcomplete]);
     }
     
     /*public function add_comment(Request $request, $id) 
