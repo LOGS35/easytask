@@ -97,7 +97,12 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Task::find($id);
+        $task->nombre = $request->nombre;
+        $task->description = $request->description;
+        $task->peso = $request->peso;
+        $task->save(); 
+        return redirect()->back()->with('status', 'La tarea "'.$task->nombre.'" fue actualizado!'); 
     }
 
     /**
@@ -108,6 +113,8 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::find($id);
+        $task->delete();
+        return redirect()->back()->with('status','La tarea: "'.$task->nombre.'" fue eliminada');
     }
 }

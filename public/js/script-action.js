@@ -77,4 +77,19 @@ $(document).ready(function () {
         $('.alert.alert-success.animated.fadeInUp').removeClass('fadeInUp').addClass('fadeOutUp');
     }, 5000);
     
+    $('.acciones-task a.btn.btn-danger').on('click', function() {
+        $('#taskelim').modal('toggle');
+        //console.log($(this).data('href'));
+        $('#taskelim').find('.btn.btn-primary').attr("href",$(this).data('href'));
+    });
+    
+    $('.acciones-task a.btn.btn-success').on('click', function() {
+        //$('#taskelim').modal('toggle');
+        //console.log($(this).data('href'));
+        $('#taskview').find('#nombre').val($(this).parent().parent('.drag-item').data('name_task'));
+        $('#taskview').find('#descripcion').val($(this).parent().parent('.drag-item').data('description'));
+        $('#taskview').find('#peso').val($(this).parent().parent('.drag-item').data('peso'));
+        $('#form-update-task form').attr("action", $(this).parent().parent('.drag-item').data('form'));
+    });
+    
 });

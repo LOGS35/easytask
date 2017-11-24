@@ -227,6 +227,9 @@ ul {
     padding: 5px;
     position: relative;
 }
+button {
+    border: 0;
+}
 .drag-item .weight {
     position: absolute;
     bottom: 2px;
@@ -399,7 +402,20 @@ ul {
     display: none !important;
 }
 
+.acciones-task {
+    position: absolute;
+    bottom: 5px;
+}
 
+.acciones-task a {
+    /* padding: 0; */
+    width: 2rem;
+    padding: 5px 0;
+    margin-right: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    z-index: 99;
+}
 
 /*#content-message {
     max-height: 50vh;

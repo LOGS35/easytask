@@ -76,9 +76,10 @@
 			
 			<ul class="drag-inner-list pendientes" id="pendiente">
 			@foreach ($task as $task)
-				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null">
+				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null" data-peso="{{ $task->peso }}" data-form="{{ route('task.update',$task->id) }}">
 				    <div class="name">{{ $task->nombre }}</div>
                     <div class="weight">{{ $task->peso }}</div>
+                    <div class="acciones-task"><a data-href="{{ route('task.destroy',$task->id) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a><a href="#" data-toggle="modal" data-target="#taskview" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
 				</li>
             @endforeach
 			</ul>
@@ -93,9 +94,10 @@
 			<ul class="drag-inner-list users-columns" id="{{ $s++ }}" data-id_usuario="{{ $users->id }}">
 		    @foreach ($taskuser as $task)
                 @if ($users->id == $task->id_usuario)
-                    <li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="{{ $users->id }}">
+                    <li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="{{ $users->id }}" data-peso="{{ $task->peso }}" data-form="{{ route('task.update',$task->id) }}">
                         <div class="name">{{ $task->nombre }}</div>
                         <div class="weight">{{ $task->peso }}</div>
+                        <div class="acciones-task"><a data-href="{{ route('task.destroy',$task->id) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a><a href="#" data-toggle="modal" data-target="#taskview" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
                     </li>
                 @endif
 		    @endforeach
@@ -109,9 +111,10 @@
 			<div class="drag-options" id="options3"></div>
 			<ul class="drag-inner-list revisiones" id="revision">
 			    @foreach ($taskrevision as $task)
-				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null">
+				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null" data-peso="{{ $task->peso }}" data-form="{{ route('task.update',$task->id) }}">
 				    <div class="name">{{ $task->nombre }}</div>
                     <div class="weight">{{ $task->peso }}</div>
+                    <div class="acciones-task"><a data-href="{{ route('task.destroy',$task->id) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a><a href="#" data-toggle="modal" data-target="#taskview" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
 				</li>
             @endforeach
 			</ul>
@@ -123,9 +126,10 @@
 			<div class="drag-options" id="options4"></div>
 			<ul class="drag-inner-list aprobadas" id="aprobado">
 			    @foreach ($taskcomplete as $task)
-				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null">
+				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null" data-peso="{{ $task->peso }}" data-form="{{ route('task.update',$task->id) }}">
 				    <div class="name">{{ $task->nombre }}</div>
                     <div class="weight">{{ $task->peso }}</div>
+                    <div class="acciones-task"><a data-href="{{ route('task.destroy',$task->id) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a><a href="#" data-toggle="modal" data-target="#taskview" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
 				</li>
             @endforeach
 			</ul>
@@ -254,7 +258,7 @@
   </div>
 </div>
 <!-- Modal confirm -->
-<div class="modal fade" id="elimmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="taskelim" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -312,6 +316,47 @@
         <button type="submit" class="btn btn-primary">Crear tarea</button>
         {!! Form::close() !!}
       </div>
+    </div>
+  </div>
+</div>
+<!-- Vista tarea -->
+<div class="modal fade bd-example-modal-lg" id="taskview" role="dialog" aria-labelledby="taskview" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="crearteam">Ver tarea</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="form-update-task">
+        {!! Form::open(['route' => ['task.update', 1], 'method' => 'PUT']) !!}
+        <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+               {!! Form::label('nombre', 'Título') !!}
+               {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre', 'required', 'id' => 'nombre']) !!}
+              </div>
+              <div class="col-md-6">
+               {!! Form::label('peso', 'Peso') !!}
+               {!! Form::select('peso', ['1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'], null, ['class' => 'form-control', 'id' => 'peso', 'placeholder' => 'Seleccione', 'required']) !!}
+              </div>
+              <!--<div class="col-md-6">
+               {!! Form::label('estado', 'Estado') !!}
+               {!! Form::select('estado', ['' => 'Seleccione', 'Activo' => 'Activo', 'Inactivo' => 'Inactivo'], null, ['class' => 'form-control']) !!}
+              </div>-->
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('description', 'Descripción') !!}
+            {!! Form::textarea('description', null, ['size' => '5x5','class' => 'form-control', 'id' => 'descripcion', 'placeholder' => 'Descripción', 'required']) !!}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+      </div>
+              {!! Form::close() !!}
     </div>
   </div>
 </div>

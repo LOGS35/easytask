@@ -112,9 +112,16 @@ Route::get('comments/add_comments_proyect', function(Illuminate\Http\Request $re
 
 Route::get('taskmodify', function(Illuminate\Http\Request $request)
 {
+    $mytime = Carbon\Carbon::now();
+//echo $now->format('d-m-Y H:i:s');
     $task = Task::find($request->id_task);
     $task->id_usuario = $request->id_user;
     $task->estado = $request->estado;
+    if($request->dia != null) {
+        $task->fecha_fin = $mytime;
+    } else {
+        $task->fecha_fin = null;
+    }
     $task->save(); 
     return $request;
 });

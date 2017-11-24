@@ -40,6 +40,7 @@ dragula([
             "id_task" : el.dataset.id_task,
             "id_user" : el.dataset.id_user,
             "estado"  : 'BackLog Usuario',
+            "dia"     : null,
         };
     } else if ($(el).parent().hasClass('pendientes')) {
         $(el).attr('data-id_user','null');
@@ -47,6 +48,7 @@ dragula([
             "id_task" : el.dataset.id_task,
             "id_user" : null,
             "estado"  : 'BackLog Proyecto',
+            "dia"     : null,
         };
                
     } else if ($(el).parent().hasClass('revisiones')) {
@@ -54,6 +56,7 @@ dragula([
             "id_task" : el.dataset.id_task,
             "id_user" : el.dataset.id_user,
             "estado"  : 'BackLog Revision',
+            "dia"     : null,
         };
                
     } else if ($(el).parent().hasClass('aprobadas')) {
@@ -61,6 +64,7 @@ dragula([
             "id_task" : el.dataset.id_task,
             "id_user" : el.dataset.id_user,
             "estado"  : 'BackLog Aprobado',
+            "dia"     : 'today',
             };   
     }
    
