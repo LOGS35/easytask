@@ -32,12 +32,58 @@ dragula([
 		}, 600);
 	}, 100);
     //el.classList.add('aqui');
-    var parametros = {
-        "id_task" : el.dataset.id_task,
-        "id_user" : 'asd',
-        "id_proy" : 'dsa'
-    };
-    console.log(parametros);
+    if ($(el).parent().hasClass('users-columns')) {
+        //$(el).data('id_user',$(el).parent().data('id_usuario'));
+        //console.log($(el).parent().data('id_usuario'));
+        $(el).attr('data-id_user',$(el).parent().data('id_usuario'));
+         var parametros = {
+            "id_task" : el.dataset.id_task,
+            "id_user" : el.dataset.id_user,
+            "estado"  : 'BackLog Usuario',
+        };
+    } else if ($(el).parent().hasClass('pendientes')) {
+        $(el).attr('data-id_user','null');
+        var parametros = {
+            "id_task" : el.dataset.id_task,
+            "id_user" : null,
+            "estado"  : 'BackLog Proyecto',
+        };
+               
+    } else if ($(el).parent().hasClass('revisiones')) {
+        var parametros = {
+            "id_task" : el.dataset.id_task,
+            "id_user" : el.dataset.id_user,
+            "estado"  : 'BackLog Revision',
+        };
+               
+    } else if ($(el).parent().hasClass('aprobadas')) {
+            var parametros = {
+            "id_task" : el.dataset.id_task,
+            "id_user" : el.dataset.id_user,
+            "estado"  : 'BackLog Aprobado',
+            };   
+    }
+   
+    
+    $.ajax({
+              data:  parametros, //datos que se envian a traves de ajax
+              url:   '/taskmodify', //archivo que recibe la peticion
+              type:  'get', //método de envio
+              beforeSend: function () {
+                //$("#resultado_comments").html("Procesando, espere por favor...");
+                  //$('.card-header').html('procesando');
+              },
+              success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                //$("#resultado_comments").html(response);
+                  //console.log(response);
+                  //$('#old_comments').load($pathname+' #coment-ajax');
+                  //$('input#message').val('');
+                  //$('#content-message').scrollTop(9999);
+                  //$('input#message').focus();
+                  console.log(parametros);
+                  console.log(response);
+              }
+            });
     //id_task
 });
 

@@ -11,6 +11,7 @@
 |
 */
 use EasyTask\Comentario_proyecto;
+use EasyTask\Task;
 
 Route::get('welcome', function () {
     return view('welcome');
@@ -107,6 +108,15 @@ Route::get('comments/add_comments_proyect', function(Illuminate\Http\Request $re
     $comment->id_user = $request->id_user;
     $comment->save(); 
     return '<p>'.$comment->descripcion.'</p>';
+});
+
+Route::get('taskmodify', function(Illuminate\Http\Request $request)
+{
+    $task = Task::find($request->id_task);
+    $task->id_usuario = $request->id_user;
+    $task->estado = $request->estado;
+    $task->save(); 
+    return $request;
 });
 
 Route::get('userfind', 'UsersController@find');

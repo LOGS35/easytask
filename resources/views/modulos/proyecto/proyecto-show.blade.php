@@ -74,9 +74,9 @@
 				
 			<div class="drag-options" id="options1"></div>
 			
-			<ul class="drag-inner-list" id="pendiente">
+			<ul class="drag-inner-list pendientes" id="pendiente">
 			@foreach ($task as $task)
-				<li class="drag-item" task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}">
+				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null">
 				    <div class="name">{{ $task->nombre }}</div>
                     <div class="weight">{{ $task->peso }}</div>
 				</li>
@@ -90,7 +90,7 @@
 				<h2>{{ $users->name.' '.$users->lastname }}</h2>
 			</span>
 			<div class="drag-options" id="options2"></div>
-			<ul class="drag-inner-list users-columns" id="{{ $s++ }}">
+			<ul class="drag-inner-list users-columns" id="{{ $s++ }}" data-id_usuario="{{ $users->id }}">
 		    @foreach ($taskuser as $task)
                 @if ($users->id == $task->id_usuario)
                     <li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="{{ $users->id }}">
@@ -107,9 +107,9 @@
 				<h2>Necesita revisión</h2>
 			</span>
 			<div class="drag-options" id="options3"></div>
-			<ul class="drag-inner-list" id="revision">
+			<ul class="drag-inner-list revisiones" id="revision">
 			    @foreach ($taskrevision as $task)
-				<li class="drag-item" task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}">
+				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null">
 				    <div class="name">{{ $task->nombre }}</div>
                     <div class="weight">{{ $task->peso }}</div>
 				</li>
@@ -121,9 +121,9 @@
 				<h2>Aprobado</h2>
 			</span>
 			<div class="drag-options" id="options4"></div>
-			<ul class="drag-inner-list" id="aprobado">
+			<ul class="drag-inner-list aprobadas" id="aprobado">
 			    @foreach ($taskcomplete as $task)
-				<li class="drag-item" task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}">
+				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null">
 				    <div class="name">{{ $task->nombre }}</div>
                     <div class="weight">{{ $task->peso }}</div>
 				</li>
