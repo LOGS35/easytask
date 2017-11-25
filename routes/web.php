@@ -100,6 +100,14 @@ Route::group(['middleware' => 'auth'], function(){
     ]);
 });
 
+Route::group(['middleware' => 'auth'], function(){
+    Route::resource('noticia','NoticiaController');
+    Route::get('noticia/{id}/story', [
+        'uses' => 'NoticiaController@mystory',
+        'as' => 'noticia.mystory'
+    ]);
+});
+
 Route::get('comments/add_comments_proyect', function(Illuminate\Http\Request $request)
 {
     $comment = new Comentario_proyecto();

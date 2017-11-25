@@ -108,10 +108,10 @@
               </a>
               <ul class="sidenav-second-level collapse" id="collapsenews">
                 <li>
-                  <a href="">Mis noticias</a>
+                  <a href="{{ route('noticia.mystory',Auth::user()->id_equip) }}">Mis noticias</a>
                 </li>
                 <li>
-                  <a href="">Todas las noticias</a>
+                  <a href="{{ route('noticia.index') }}">Todas las noticias</a>
                 </li>
               </ul>
           </li>

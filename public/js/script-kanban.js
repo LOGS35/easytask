@@ -43,7 +43,7 @@ dragula([
             "dia"     : null,
         };
     } else if ($(el).parent().hasClass('pendientes')) {
-        $(el).attr('data-id_user','null');
+        $(el).attr('data-id_user',null);
         var parametros = {
             "id_task" : el.dataset.id_task,
             "id_user" : null,

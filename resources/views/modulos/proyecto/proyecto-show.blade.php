@@ -330,7 +330,7 @@
         </button>
       </div>
       <div class="modal-body" id="form-update-task">
-        {!! Form::open(['route' => ['task.update', 1], 'method' => 'PUT']) !!}
+        {!! Form::open(['route' => 'task.store', 'method' => 'PUT']) !!}
         <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
