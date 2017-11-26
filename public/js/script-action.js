@@ -72,6 +72,38 @@ $(document).ready(function () {
             });
         //$('#resultado_comments').load('/comments/add_comments_proyect #resultado_comments');
     });
+    $('input#message-noticia').keyup(function(e){
+        if(e.keyCode == 13)
+        {
+            $('#submit-comment-noticia').focus();
+        }
+    });
+    $('#submit-comment-noticia').on('click', function(e) {
+        $pathname = window.location.pathname;
+        //$('#resultado_comments p').appendTo('#old_comments');
+        var parametros = {
+                "comentario" : $('input#message-noticia').val(),
+                "id_user" : $(this).data('id_user'),
+                "id_noticia" : $(this).data('id_noticia')
+        };
+        $.ajax({
+              data:  parametros, //datos que se envian a traves de ajax
+              url:   '/comments/add_comments_noticia', //archivo que recibe la peticion
+              type:  'get', //método de envio
+              beforeSend: function () {
+                //$("#resultado_comments").html("Procesando, espere por favor...");
+              },
+              success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                //$("#resultado_comments").html(response);
+                  //console.log(response);
+                  $('#old_comments').load($pathname+' #coment-ajax');
+                  $('input#message-noticia').val('');
+                  //$('#content-message').scrollTop(9999);
+                  $('input#message-noticia').focus();
+              }
+            });
+        //$('#resultado_comments').load('/comments/add_comments_proyect #resultado_comments');
+    });
     //$('#content-message').scrollTop(9999);
     setTimeout(function () {
         $('.alert.alert-success.animated.fadeInUp').removeClass('fadeInUp').addClass('fadeOutUp');

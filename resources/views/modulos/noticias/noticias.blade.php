@@ -24,47 +24,22 @@
             <i class="fa fa-newspaper-o"></i> Ultimas noticias</div>
           <hr class="mt-2">
           <div class="card-columns mb-3-equip">
+          @foreach($noticias as $noticia)
           <div class="card mb-3">
-              <a href="#">
-                <img class="card-img-top img-fluid w-100" src="https://unsplash.it/700/450?image=180" alt="">
+              <a href="{{ route('noticia.show',$noticia->noticia_id) }}">
+                <img class="card-img-top img-fluid w-100" src="{{ route('storage',$noticia->image) }}" alt="">
               </a>
               <div class="card-body">
-                <h6 class="card-title mb-1"><a href="#">John Smith</a></h6>
-                <p class="card-text small">Another day at the office...
-                  <a href="#">#workinghardorhardlyworking</a>
+                <h6 class="card-title mb-1"><a href="{{ route('noticia.show',$noticia->noticia_id) }}">{{ str_limit($noticia->title, 80) }}</a></h6>
+                <p class="card-text small">
+                    Enviado por: <a href="{{ route('users.show',$noticia->user_id) }}">{{ $noticia->name.' '.$noticia->lastname }}</a>
                 </p>
               </div>
               <hr class="my-0">
-              <div class="card-body py-2 small">
-                <!--<a class="mr-3 d-inline-block" href="#">
-                  <i class="fa fa-fw fa-thumbs-up"></i>Like</a>-->
-                <a class="mr-3 d-inline-block" href="#">
-                  <i class="fa fa-fw fa-comment"></i>Comment</a>
-                <!--<a class="d-inline-block" href="#">
-                  <i class="fa fa-fw fa-share"></i>Share</a>-->
-              </div>
-              <hr class="my-0">
-              <div class="card-body small bg-faded">
-                <div class="media">
-                  <img class="d-flex mr-3" src="http://placehold.it/45x45" alt="">
-                  <div class="media-body">
-                    <h6 class="mt-0 mb-1"><a href="#">Jessy Lucas</a></h6>Where did you get that camera?! I want one!
-                    <!--<ul class="list-inline mb-0">
-                      <li class="list-inline-item">
-                        <a href="#">Like</a>
-                      </li>
-                      <li class="list-inline-item">·</li>
-                      <li class="list-inline-item">
-                        <a href="#">Reply</a>
-                      </li>
-                    </ul>-->
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer small text-muted">Posted 46 mins ago</div>
+              <div class="card-footer small text-muted">Fecha de creación: {{ Carbon\Carbon::parse($noticia->fecha)->format('d-m-Y \a \l\a\s H:i:s') }}</div>
             </div>
+        @endforeach
         </div>
-        
     </div>
     <!-- /.container-fluid-->
 </div>
@@ -93,7 +68,7 @@
             <div class="form-row">
               <div class="col-md-12">
                {!! Form::label('content', 'Contenido') !!}
-               {!! Form::textarea('content', null, ['size' => '5x5','class' => 'form-control', 'placeholder' => 'Contenido', 'required']) !!}
+               {!! Form::textarea('content', null, ['size' => '5x5','class' => 'form-control ckeditor', 'placeholder' => 'Contenido', 'required']) !!}
               </div>
             </div>
         </div>

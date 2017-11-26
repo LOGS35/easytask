@@ -64,7 +64,7 @@
           <div class="card-header">
               <i class="fa fa-fw fa-list"></i>Tareas
           </div>
-          <div class="card-body">
+          <div class="card-body padding-0">
               <div class="drag-container">
 	<ul class="drag-list">
 		<li class="drag-column drag-column-on-hold">
@@ -111,10 +111,10 @@
 			<div class="drag-options" id="options3"></div>
 			<ul class="drag-inner-list revisiones" id="revision">
 			    @foreach ($taskrevision as $task)
-				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null" data-peso="{{ $task->peso }}" data-form="{{ route('task.update',$task->id) }}">
+				<li class="drag-item" data-id_task="{{ $task->taskid }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="{{ $task->userid }}" data-peso="{{ $task->peso }}" data-form="{{ route('task.update',$task->taskid) }}">
 				    <div class="name">{{ $task->nombre }}</div>
                     <div class="weight">{{ $task->peso }}</div>
-                    <div class="acciones-task"><a data-href="{{ route('task.destroy',$task->id) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a><a href="#" data-toggle="modal" data-target="#taskview" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
+                    <div class="acciones-task"><a data-href="{{ route('task.destroy',$task->taskid) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a><a href="#" data-toggle="modal" data-target="#taskview" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
 				</li>
             @endforeach
 			</ul>
@@ -126,10 +126,10 @@
 			<div class="drag-options" id="options4"></div>
 			<ul class="drag-inner-list aprobadas" id="aprobado">
 			    @foreach ($taskcomplete as $task)
-				<li class="drag-item" data-id_task="{{ $task->id }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="null" data-peso="{{ $task->peso }}" data-form="{{ route('task.update',$task->id) }}">
+				<li class="drag-item" data-id_task="{{ $task->taskid }}" data-name_task="{{ $task->nombre }}" data-description="{{ $task->description }}" data-id_user="{{ $task->userid }}" data-peso="{{ $task->peso }}" data-form="{{ route('task.update',$task->taskid) }}">
 				    <div class="name">{{ $task->nombre }}</div>
                     <div class="weight">{{ $task->peso }}</div>
-                    <div class="acciones-task"><a data-href="{{ route('task.destroy',$task->id) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a><a href="#" data-toggle="modal" data-target="#taskview" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
+                    <div class="acciones-task"><a data-href="{{ route('task.destroy',$task->taskid) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a><a href="#" data-toggle="modal" data-target="#taskview" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
 				</li>
             @endforeach
 			</ul>

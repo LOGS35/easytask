@@ -106,14 +106,19 @@ class ProyectoController extends Controller
             ->orderBy('peso', 'desc')
             ->get();
         $taskrevision = DB::table('task')
+            ->join('users', 'task.id_usuario', '=', 'users.id')
+            ->select(DB::raw('task.id as taskid, task.nombre, task.description, task.peso, users.id as userid, users.name, users.lastname'))
             ->where([['id_proyecto',$id],['estado','=','BackLog Revision'],])
             ->orderBy('peso', 'desc')
             ->get();
         $taskcomplete = DB::table('task')
+            ->join('users', 'task.id_usuario', '=', 'users.id')
+            ->select(DB::raw('task.id as taskid, task.nombre, task.description, task.peso, users.id as userid, users.name, users.lastname'))
             ->where([['id_proyecto',$id],['estado','=','BackLog Aprobado'],])
             ->orderBy('peso', 'desc')
             ->get();
         //dd($task);
+        //dd($taskrevision);
         
         //dd($equipo);
         //dd($proyecto);
@@ -151,10 +156,16 @@ class ProyectoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $mytime = \Carbon\Carbon::now();
         $proyecto = Proyecto::find($id);
         $proyecto->name = $request->name;
         $proyecto->description = $request->description;
         $proyecto->estado = $request->estado;
+        if ($proyecto->estado == 'Terminado') {
+            $proyecto->fecha_fin = $mytime;
+        } else {
+            $proyecto->fecha_fin = null;
+        }
         //dd($equipo);
         $proyecto->save(); 
         

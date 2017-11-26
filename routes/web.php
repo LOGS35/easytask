@@ -11,6 +11,7 @@
 |
 */
 use EasyTask\Comentario_proyecto;
+use EasyTask\Comentario_noticia;
 use EasyTask\Task;
 
 Route::get('welcome', function () {
@@ -106,6 +107,24 @@ Route::group(['middleware' => 'auth'], function(){
         'uses' => 'NoticiaController@mystory',
         'as' => 'noticia.mystory'
     ]);
+    Route::get('noticia/{id}/destroy', [
+        'uses' => 'NoticiaController@destroy',
+        'as' => 'noticia.destroy'
+    ]);
+    /*Route::get('noticia/{id}', [
+        'uses' => 'NoticiaController@show',
+        'as' => 'noticia.show'
+    ]);*/
+});
+
+Route::get('comments/add_comments_noticia', function(Illuminate\Http\Request $request)
+{
+    $comment = new Comentario_noticia();
+    $comment->descripcion = $request->comentario;
+    $comment->id_noticia = $request->id_noticia;
+    $comment->id_user = $request->id_user;
+    $comment->save(); 
+    return '<p>'.$comment->descripcion.'</p>';
 });
 
 Route::get('comments/add_comments_proyect', function(Illuminate\Http\Request $request)
@@ -123,7 +142,9 @@ Route::get('taskmodify', function(Illuminate\Http\Request $request)
     $mytime = Carbon\Carbon::now();
 //echo $now->format('d-m-Y H:i:s');
     $task = Task::find($request->id_task);
-    $task->id_usuario = $request->id_user;
+    if($request->id_usuario > 1 || $request->id_usuario == null) {
+        $task->id_usuario = $request->id_user;
+    }
     $task->estado = $request->estado;
     if($request->dia != null) {
         $task->fecha_fin = $mytime;
@@ -133,6 +154,20 @@ Route::get('taskmodify', function(Illuminate\Http\Request $request)
     $task->save(); 
     return $request;
 });
+
+
+Route::get('storage/{archivo}', function ($archivo) {
+     $public_path = public_path();
+     $url = $public_path.'/storage/'.$archivo;
+     //verificamos si el archivo existe y lo retornamos
+     if (Storage::exists($archivo))
+     {
+       return response()->download($url);
+     }
+     //si no se encuentra lanzamos un error 404.
+     abort(404);
+
+})->name('storage');
 
 Route::get('userfind', 'UsersController@find');
 Route::get('equipofind', 'EquipController@find');

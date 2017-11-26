@@ -51,12 +51,12 @@
               <span class="nav-link-text">Usuarios</span>
           </a>
           </li>
-          <li class="nav-item" data-toggle="tooltip" data-placement="left" title="Clientes">
+          <!--<li class="nav-item" data-toggle="tooltip" data-placement="left" title="Clientes">
           <a class="nav-link" href="{{ route('clientes.index') }}">
               <i class="fa fa-fw fa-address-book" aria-hidden="true"></i>
               <span class="nav-link-text">Clientes</span>
           </a>
-          </li>
+          </li>-->
           <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Equipo">
               <a class="nav-link nav-link-collapse collapsed dropdown" href="#collapseEquipo" data-target="#collapseEquipo">
                 <i class="fa fa-fw fa-users"></i>
@@ -108,7 +108,7 @@
               </a>
               <ul class="sidenav-second-level collapse" id="collapsenews">
                 <li>
-                  <a href="{{ route('noticia.mystory',Auth::user()->id_equip) }}">Mis noticias</a>
+                  <a href="{{ route('noticia.mystory',Auth::user()->id) }}">Mis noticias</a>
                 </li>
                 <li>
                   <a href="{{ route('noticia.index') }}">Todas las noticias</a>
@@ -295,6 +295,7 @@
     <script src="{{ asset('js/kanban.js') }}"></script>
     <script src="{{ asset('js/script-kanban.js') }}"></script>
     <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/popper/popper.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
