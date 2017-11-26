@@ -3,6 +3,11 @@
 namespace EasyTask\Http\Controllers;
 
 use Illuminate\Http\Request;
+use EasyTask\Noticia;
+use EasyTask\Image_noticia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +28,30 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if (Auth::user()->id_equip == null) {
+            $id_proyecto = 1;
+            $task_count = 1;
+        } else {
+            $id_proyecto = DB::table('proyecto')
+                        ->select('id')
+                        ->where('id_equipo',Auth::user()->id_equip)
+                        ->latest()
+                        ->first();
+
+            $task_count = DB::table('task')
+                    ->where('id_proyecto',$id_proyecto->id)
+                    ->count();
+        }
+        $noticia_count = DB::table('noticias')
+            ->count();
+        $noticia = DB::table('noticias')
+            ->join('users', 'noticias.user_id', '=', 'users.id')
+            ->join('imagenes_noticias', 'noticias.id', '=', 'imagenes_noticias.id_noticia')
+            ->select(DB::raw('noticias.id as noticia_id, noticias.created_at as fecha, noticias.title, noticias.content, users.id as user_id, users.name, users.lastname, imagenes_noticias.name as image'))
+            /*->where([['id_proyecto',$id],['estado','=','BackLog Aprobado'],])*/
+            ->orderBy('noticias.created_at', 'desc')
+            ->paginate(4);
+
+        return view('home',['noticias' => $noticia, 'cantidad' => $noticia_count, 'taskcount' => $task_count, 'id_proyecto' => $id_proyecto]);
     }
 }

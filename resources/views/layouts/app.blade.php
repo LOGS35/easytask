@@ -28,7 +28,7 @@
     <!--<link href="{} asset('css/app.css') {}" rel="stylesheet">-->
 </head>
 <body id="page-top">
-     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="mainNav">
     <!-- Branding Image -->
     <a class="navbar-brand" href="{{ url('/') }}">
        {{ config('app.name', 'EasyTask') }}
@@ -309,7 +309,7 @@
     <script src="{{ asset('js/sb-admin.min.js') }}"></script>
     <!-- Custom scripts for this page-->
     <script src="{{ asset('js/sb-admin-datatables.min.js') }}"></script>
-    <script src="{{ asset('js/sb-admin-charts.min.js') }}"></script>
+    <script src="{{ asset('js/sb-admin-charts.js') }}"></script>
     <!-- tags -->
     <script src="{{ asset('tags/select2.min.js') }}"></script>
     <!-- Sweet -->
