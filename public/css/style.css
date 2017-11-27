@@ -29,7 +29,7 @@ a.dropdown-item.small {
 
 .login {
     /* height: 100%; */
-    background-color: #343a40!important;
+    background-color: #f8f9fa!important;
     min-height: calc(100vh - 0px);
     padding-top: 12em;
     /* display: flex; */
@@ -428,4 +428,25 @@ button {
 
 img {
     max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .login {
+        padding-top: 10em;
+    }
+    .login.register {
+        padding-top: 6em;
+    }
+    .equipo-show .estado {
+        margin-top: 5px;
+    }
+    .drag-column {
+        margin: 0 3px;
+    }
+    .drag-column .name {
+        font-size: 14px;
+    }
+    .drag-column h2 {
+        font-size: .8rem;
+    }
 }

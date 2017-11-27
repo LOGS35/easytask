@@ -10,6 +10,18 @@
         </li>
         <li class="breadcrumb-item active">Mi Tablero</li>
       </ol>
+      <!-- Acciones -->
+      @if (Auth::user()->type == "Scrum Master")
+          <div class="card mb-3">
+              <div class="card-header">
+                  <i class="fa fa-cog fa-fw" aria-hidden="true"></i>Acciones
+              </div>
+              <div class="card-body">
+                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#proyectoreport">Reporte de proyecto <i class="fa fa-plus fa-fw" aria-hidden="true"></i></a>
+                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#rendimientoreport">Reporte de rendimiento <i class="fa fa-plus fa-fw" aria-hidden="true"></i></a>
+              </div> 
+          </div>
+      @endif
       <!-- Icon Cards-->
       <div class="row">
         <div class="col-xl-6 col-sm-6 mb-3">
@@ -121,6 +133,39 @@
         </div>
     </div>
   </div>
+      <!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="rendimientoreport" role="dialog" aria-labelledby="crearteam" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="crearteam">Crear reporte de rendimiento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {!! Form::open(['route' => 'pdf.proyecto', 'method' => 'POST']) !!}
+        <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+               {!! Form::label('date_ini', 'Fecha inicial') !!}
+               {!! Form::date('date_ini', null, ['class' => 'form-control', 'required']) !!}
+              </div>
+              <div class="col-md-6">
+               {!! Form::label('date_ini', 'Fecha final') !!}
+               {!! Form::date('date_fin', null, ['class' => 'form-control', 'required']) !!}
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Crear reporte</button>
+      </div>
+              {!! Form::close() !!}
+    </div>
+  </div>
+</div>
 @endsection
 @section('script')
 <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>

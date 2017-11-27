@@ -46,6 +46,8 @@ Route::get('/', 'HomeController@index')->name('home');
     Route::resource('profile','ProfileController');
 });*/
 
+Route::post('pdf', 'PdfController@invoice')->name('pdf.proyecto');
+
 Route::group(['middleware' => 'auth'], function(){
     Route::resource('equipo','EquipController');
     Route::get('equipo/{id}/destroy', [

@@ -8,7 +8,6 @@ use EasyTask\Image_noticia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Charts;
 
 class HomeController extends Controller
 {
@@ -70,4 +69,5 @@ class HomeController extends Controller
 
         return view('home',['noticias' => $noticia, 'cantidad' => $noticia_count, 'taskcount' => $task_count, 'id_proyecto' => $id_proyecto]);
     }
+    
 }
