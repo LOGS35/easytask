@@ -36,7 +36,7 @@
                        <div class="form-row">
                            <div class="col-md-12">
                               <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
-                               {!! Form::label('email', 'Correo Electronico') !!}
+                               {!! Form::label('email', 'Correo Electrónico') !!}
                                {!! Form::email('email', Auth::user()->email, ['class' => 'form-control', 'placeholder' => 'example@gmail.com', 'required', 'autofocus']) !!}
                                 
                                </div>

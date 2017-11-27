@@ -49,7 +49,7 @@
         </button>
       </div>
       <div class="modal-body">
-        Tenga en cuenta que no podras recuperarlo
+        Tenga en cuenta que no podrás recuperarlo
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
