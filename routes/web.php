@@ -13,6 +13,7 @@
 use EasyTask\Comentario_proyecto;
 use EasyTask\Comentario_noticia;
 use EasyTask\Task;
+use Illuminate\Support\Facades\DB;
 
 Route::get('welcome', function () {
     return view('welcome');
@@ -115,6 +116,187 @@ Route::group(['middleware' => 'auth'], function(){
         'uses' => 'NoticiaController@show',
         'as' => 'noticia.show'
     ]);*/
+});
+
+Route::get('grafics/grafica1', function()
+{
+    //Carbon\Carbon::parse($noticia->fecha)->format('d-m-Y \a \l\a\s H:i:s')
+    $date = Carbon\Carbon::now();
+    $monday = new Carbon\Carbon('last monday');
+    $tuesday = new Carbon\Carbon('last tuesday');
+    $wednesday = new Carbon\Carbon('last wednesday');
+    $thursday = new Carbon\Carbon('last thursday');
+    $friday = new Carbon\Carbon('last friday');
+    $saturday = new Carbon\Carbon('last saturday');
+    $sunday = new Carbon\Carbon('last sunday');
+    
+    $hoy = Carbon\Carbon::parse($date)->format('Y-m-d');
+    $lunes = Carbon\Carbon::parse($monday)->format('Y-m-d');
+    $martes = Carbon\Carbon::parse($tuesday)->format('Y-m-d');
+    $miercoles = Carbon\Carbon::parse($wednesday)->format('Y-m-d');
+    $jueves = Carbon\Carbon::parse($thursday)->format('Y-m-d');
+    $viernes = Carbon\Carbon::parse($friday)->format('Y-m-d');
+    $sabado = Carbon\Carbon::parse($saturday)->format('Y-m-d');
+    $domingo = Carbon\Carbon::parse($sunday)->format('Y-m-d');
+    
+    $proyecto = DB::table('proyecto')
+            ->select('id')
+            ->where('id_equipo',Auth::user()->id_equip)
+            ->latest()
+            ->first();
+    $task_count_hoy = DB::table('task')
+            ->where('id_proyecto',$proyecto->id)
+            ->where('estado','BackLog Aprobado')
+            ->whereDate('fecha_fin', $hoy)
+            ->count();
+    $task_count_monday = DB::table('task')
+            ->where('id_proyecto',$proyecto->id)
+            ->where('estado','BackLog Aprobado')
+            ->whereDate('fecha_fin', $lunes)
+            ->count();
+    $task_count_tuesday = DB::table('task')
+            ->where('id_proyecto',$proyecto->id)
+            ->where('estado','BackLog Aprobado')
+            ->whereDate('fecha_fin', $martes)
+            ->count();
+    $task_count_wednesday = DB::table('task')
+            ->where('id_proyecto',$proyecto->id)
+            ->where('estado','BackLog Aprobado')
+            ->whereDate('fecha_fin', $miercoles)
+            ->count();
+    $task_count_thursday = DB::table('task')
+            ->where('id_proyecto',$proyecto->id)
+            ->where('estado','BackLog Aprobado')
+            ->whereDate('fecha_fin', $jueves)
+            ->count();
+    $task_count_friday = DB::table('task')
+            ->where('id_proyecto',$proyecto->id)
+            ->where('estado','BackLog Aprobado')
+            ->whereDate('fecha_fin', $viernes)
+            ->count();
+    $task_count_saturday = DB::table('task')
+            ->where('id_proyecto',$proyecto->id)
+            ->where('estado','BackLog Aprobado')
+            ->whereDate('fecha_fin', $sabado)
+            ->count();
+    $task_count_sunday = DB::table('task')
+            ->where('id_proyecto',$proyecto->id)
+            ->where('estado','BackLog Aprobado')
+            ->whereDate('fecha_fin', $domingo)
+            ->count();
+    //dd($monday);
+    $array = array(
+        "hoy" => $task_count_hoy,
+        "lunes" => $task_count_monday,
+        "martes" => $task_count_tuesday,
+        "miercoles" => $task_count_wednesday,
+        "jueves" => $task_count_thursday,
+        "viernes" => $task_count_friday,
+        "sabado" => $task_count_saturday,
+        "domingo" => $task_count_sunday,
+    );
+    
+    return $array;
+});
+
+Route::get('grafics/grafica2', function()
+{
+    $proyecto = DB::table('proyecto')
+            ->select('id')
+            ->where('id_equipo',Auth::user()->id_equip)
+            ->latest()
+            ->first();
+    $task_count_total = DB::table('task')
+            ->where('id_proyecto',$proyecto->id)
+            ->where('estado','BackLog Revision')
+            ->orWhere('estado', 'BackLog Usuario')
+            ->orWhere('estado', 'BackLog Proyecto')
+            ->count();
+    $task_count_terminado = DB::table('task')
+            ->where('id_proyecto',$proyecto->id)
+            ->where('estado','BackLog Aprobado')
+            ->count();
+    
+    //dd($monday);
+    $array = array(
+        "task_count_terminado" => $task_count_total,
+        "task_count_total" => $task_count_terminado,
+    );
+    
+    return $array;
+});
+
+Route::get('grafics/grafica3', function()
+{
+    $date = Carbon\Carbon::now();
+    $hoy = Carbon\Carbon::parse($date)->format('Y');
+    
+    $proyecto_uno = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '01')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_dos = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '02')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_tres = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '03')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_cuatro = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '04')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_cinco = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '05')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_seis = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '06')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_siete = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '07')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_ocho = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '08')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_nueve = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '09')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_diez = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '10')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_once = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '11')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    $proyecto_doce = DB::table('proyecto')
+            ->whereMonth('fecha_fin', '12')
+            ->whereYear('fecha_fin', '=', $hoy)
+            ->count();
+    
+    //dd($monday);
+    $array = array(
+        "uno" => $proyecto_uno,
+        "dos" => $proyecto_dos,
+        "tres" => $proyecto_tres,
+        "cuatro" => $proyecto_cuatro,
+        "cinco" => $proyecto_cinco,
+        "seis" => $proyecto_seis,
+        "siete" => $proyecto_siete,
+        "ocho" => $proyecto_ocho,
+        "nueve" => $proyecto_nueve,
+        "diez" => $proyecto_diez,
+        "once" => $proyecto_once,
+        "doce" => $proyecto_doce,
+    );
+    
+    return $array;
 });
 
 Route::get('comments/add_comments_noticia', function(Illuminate\Http\Request $request)

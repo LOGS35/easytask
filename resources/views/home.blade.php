@@ -67,33 +67,33 @@
       <!-- Area Chart Example-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-area-chart"></i> Proceso del último proyecto creado del que eres parte</div>
+          <i class="fa fa-area-chart"></i> Proceso del último proyecto creado del que eres parte: {{ $id_proyecto->name }}</div>
         <div class="card-body">
           <canvas id="myAreaCharts" width="100%" height="30"></canvas>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        <div class="card-footer small text-muted">Creado: {{ Carbon\Carbon::parse($id_proyecto->created_at)->format('Y-m-d \a \l\a\s H:i:s') }}</div>
       </div>
       <div class="row">
         <div class="col-lg-8">
           <!-- Example Bar Chart Card-->
           <div class="card mb-3">
             <div class="card-header">
-              <i class="fa fa-bar-chart"></i> Bar Chart Example</div>
+              <i class="fa fa-bar-chart"></i> Proyectos finalizados</div>
             <div class="card-body">
               <canvas id="myBarCharts" width="100" height="50"></canvas>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <!--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
           </div>
         </div>
         <div class="col-lg-4">
           <!-- Example Pie Chart Card-->
           <div class="card mb-3">
             <div class="card-header">
-              <i class="fa fa-pie-chart"></i> Pie Chart Example</div>
+              <i class="fa fa-pie-chart"></i> Tareas del proyecto: {{ $id_proyecto->name }}</div>
             <div class="card-body">
               <canvas id="myPieCharts" width="100%" height="100"></canvas>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <div class="card-footer small text-muted">Creado: {{ Carbon\Carbon::parse($id_proyecto->created_at)->format('Y-m-d \a \l\a\s H:i:s') }}</div>
           </div>
         </div>
       </div>
@@ -121,4 +121,8 @@
         </div>
     </div>
   </div>
+@endsection
+@section('script')
+<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+<script src="{{ asset('js/sb-admin-charts.js') }}"></script>
 @endsection

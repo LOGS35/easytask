@@ -8,6 +8,7 @@ use EasyTask\Image_noticia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Charts;
 
 class HomeController extends Controller
 {
@@ -28,12 +29,27 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /*$chart = Charts::create('area', 'highcharts')
+        ->title('My nice chart')
+        ->elementLabel('My nice label')
+        ->labels(['Lunes', 'Martes', 'Miércoles','Jueves', 'Viernes', 'Sabado','Domingo'])
+        ->values([5,10,20])
+        ->dimensions(1000,500)
+        ->responsive(false);
+        
+        $chartpogress = Charts::create('donut', 'highcharts')
+        ->title('My nice chart')
+        ->labels(['First', 'Second', 'Third'])
+        ->values([5,10,20])
+        ->dimensions(1000,500)
+        ->responsive(false);*/
+        
         if (Auth::user()->id_equip == null) {
             $id_proyecto = 1;
             $task_count = 1;
         } else {
             $id_proyecto = DB::table('proyecto')
-                        ->select('id')
+                        ->select('id', 'created_at','name')
                         ->where('id_equipo',Auth::user()->id_equip)
                         ->latest()
                         ->first();
