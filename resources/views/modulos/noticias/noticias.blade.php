@@ -21,7 +21,7 @@
           </div>
       <!-- noticias -->
       <div class="mb-0 mt-4">
-            <i class="fa fa-newspaper-o"></i> Ultimas noticias</div>
+            <i class="fa fa-newspaper-o"></i> Últimas noticias</div>
           <hr class="mt-2">
           <div class="card-columns mb-3-equip">
           @foreach($noticias as $noticia)
@@ -59,8 +59,8 @@
         <div class="form-group">
             <div class="form-row">
               <div class="col-md-12">
-               {!! Form::label('title', 'Nombre') !!}
-               {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Titulo', 'required']) !!}
+               {!! Form::label('title', 'Título') !!}
+               {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Título', 'required']) !!}
               </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Crear proyecto</button>
+        <button type="submit" class="btn btn-primary">Crear noticia</button>
       </div>
               {!! Form::close() !!}
     </div>

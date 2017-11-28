@@ -225,7 +225,7 @@
                 <!--<i class="fa fa-fw fa-sign-out"></i>-->{{ Auth::user()->name }} <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-                <li><h6 class="dropdown-header">Menu</h6></li>
+                <li><h6 class="dropdown-header">Menú</h6></li>
                 <div class="dropdown-divider"></div>
                 <li><a class="dropdown-item small" href="{{ route('users.show', Auth::user()->id) }}">
                 <i class="fa fa-user" aria-hidden="true"></i>Mi perfil</a></li>

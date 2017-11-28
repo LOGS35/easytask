@@ -5,10 +5,10 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">
+        <li class="breadcrumb-item active">
           <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Mi Tablero</li>
+       <!--  <li class="breadcrumb-item active">Mi Tablero</li> -->
       </ol>
       <!-- Acciones -->
       @if (Auth::user()->type == "Scrum Master")
@@ -17,8 +17,11 @@
                   <i class="fa fa-cog fa-fw" aria-hidden="true"></i>Acciones
               </div>
               <div class="card-body">
-                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#proyectoreport">Reporte de proyecto <i class="fa fa-plus fa-fw" aria-hidden="true"></i></a>
-                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#rendimientoreport">Reporte de rendimiento <i class="fa fa-plus fa-fw" aria-hidden="true"></i></a>
+                   <div class="row">
+                    <div class="col-md-4"><select class="js-example-basic-single form-control" name="proyecto" id="proyecto" required></select></div>
+                    <div class="col-md-4">
+                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#rendimientoreport">Reporte de rendimiento <i class="fa fa-plus fa-fw" aria-hidden="true"></i></a></div>
+                        </div>
               </div> 
           </div>
       @endif
@@ -47,7 +50,7 @@
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-list"></i>
               </div>
-              <div class="mr-5">{{ $taskcount }} Nuevas tareas</div>
+              <div class="mr-5">{{ $taskcount }} Nuevas tareas en el proyecto: {{ $id_proyecto->name }}</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="{{ route('proyecto.show',$id_proyecto->id) }}">
               <span class="float-left">Ver detalles</span>
@@ -79,11 +82,13 @@
       <!-- Area Chart Example-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-area-chart"></i> Proceso del último proyecto creado del que eres parte: {{ $id_proyecto->name }}</div>
-        <div class="card-body">
+          <i class="fa fa-area-chart"></i> Proceso del proyecto</div>
+          <div id="char-complete">
+            <div class="card-body" id="body-complete">
           <canvas id="myAreaCharts" width="100%" height="30"></canvas>
-        </div>
-        <div class="card-footer small text-muted">Creado: {{ Carbon\Carbon::parse($id_proyecto->created_at)->format('Y-m-d \a \l\a\s H:i:s') }}</div>
+            </div>
+            </div>
+        <!-- <div class="card-footer small text-muted">Creado: {{ Carbon\Carbon::parse($id_proyecto->created_at)->format('Y-m-d \a \l\a\s H:i:s') }}</div> -->
       </div>
       <div class="row">
         <div class="col-lg-8">
@@ -91,9 +96,7 @@
           <div class="card mb-3">
             <div class="card-header">
               <i class="fa fa-bar-chart"></i> Proyectos finalizados</div>
-            <div class="card-body">
               <canvas id="myBarCharts" width="100" height="50"></canvas>
-            </div>
             <!--<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>-->
           </div>
         </div>
@@ -101,18 +104,20 @@
           <!-- Example Pie Chart Card-->
           <div class="card mb-3">
             <div class="card-header">
-              <i class="fa fa-pie-chart"></i> Tareas del proyecto: {{ $id_proyecto->name }}</div>
-            <div class="card-body">
+              <i class="fa fa-pie-chart"></i> Tareas del proyecto</div>
+                      <div id="char-task">
+            <div class="card-body" id="body-task">
               <canvas id="myPieCharts" width="100%" height="100"></canvas>
             </div>
-            <div class="card-footer small text-muted">Creado: {{ Carbon\Carbon::parse($id_proyecto->created_at)->format('Y-m-d \a \l\a\s H:i:s') }}</div>
+              </div>
+            <!-- <div class="card-footer small text-muted">Creado: {{ Carbon\Carbon::parse($id_proyecto->created_at)->format('Y-m-d \a \l\a\s H:i:s') }}</div> -->
           </div>
         </div>
       </div>
       @endif
       <!-- noticias -->
       <div class="mb-0 mt-4">
-            <i class="fa fa-newspaper-o"></i> Ultimas noticias</div>
+            <i class="fa fa-newspaper-o"></i> Últimas noticias</div>
           <hr class="mt-2">
           <div class="card-columns">
           @foreach($noticias as $noticia)

@@ -120,7 +120,7 @@ Route::group(['middleware' => 'auth'], function(){
     ]);*/
 });
 
-Route::get('grafics/grafica1', function()
+Route::get('grafics/grafica1', function(Illuminate\Http\Request $request)
 {
     //Carbon\Carbon::parse($noticia->fecha)->format('d-m-Y \a \l\a\s H:i:s')
     $date = Carbon\Carbon::now();
@@ -141,48 +141,48 @@ Route::get('grafics/grafica1', function()
     $sabado = Carbon\Carbon::parse($saturday)->format('Y-m-d');
     $domingo = Carbon\Carbon::parse($sunday)->format('Y-m-d');
     
-    $proyecto = DB::table('proyecto')
+    /*$proyecto = DB::table('proyecto')
             ->select('id')
             ->where('id_equipo',Auth::user()->id_equip)
             ->latest()
-            ->first();
+            ->first();*/
     $task_count_hoy = DB::table('task')
-            ->where('id_proyecto',$proyecto->id)
+            ->where('id_proyecto',$request->id_proyecto)
             ->where('estado','BackLog Aprobado')
             ->whereDate('fecha_fin', $hoy)
             ->count();
     $task_count_monday = DB::table('task')
-            ->where('id_proyecto',$proyecto->id)
+            ->where('id_proyecto',$request->id_proyecto)
             ->where('estado','BackLog Aprobado')
             ->whereDate('fecha_fin', $lunes)
             ->count();
     $task_count_tuesday = DB::table('task')
-            ->where('id_proyecto',$proyecto->id)
+            ->where('id_proyecto',$request->id_proyecto)
             ->where('estado','BackLog Aprobado')
             ->whereDate('fecha_fin', $martes)
             ->count();
     $task_count_wednesday = DB::table('task')
-            ->where('id_proyecto',$proyecto->id)
+            ->where('id_proyecto',$request->id_proyecto)
             ->where('estado','BackLog Aprobado')
             ->whereDate('fecha_fin', $miercoles)
             ->count();
     $task_count_thursday = DB::table('task')
-            ->where('id_proyecto',$proyecto->id)
+            ->where('id_proyecto',$request->id_proyecto)
             ->where('estado','BackLog Aprobado')
             ->whereDate('fecha_fin', $jueves)
             ->count();
     $task_count_friday = DB::table('task')
-            ->where('id_proyecto',$proyecto->id)
+            ->where('id_proyecto',$request->id_proyecto)
             ->where('estado','BackLog Aprobado')
             ->whereDate('fecha_fin', $viernes)
             ->count();
     $task_count_saturday = DB::table('task')
-            ->where('id_proyecto',$proyecto->id)
+            ->where('id_proyecto',$request->id_proyecto)
             ->where('estado','BackLog Aprobado')
             ->whereDate('fecha_fin', $sabado)
             ->count();
     $task_count_sunday = DB::table('task')
-            ->where('id_proyecto',$proyecto->id)
+            ->where('id_proyecto',$request->id_proyecto)
             ->where('estado','BackLog Aprobado')
             ->whereDate('fecha_fin', $domingo)
             ->count();
@@ -201,28 +201,43 @@ Route::get('grafics/grafica1', function()
     return $array;
 });
 
-Route::get('grafics/grafica2', function()
+Route::get('grafics/grafica2', function(Illuminate\Http\Request $request)
 {
-    $proyecto = DB::table('proyecto')
+    /*$proyecto = DB::table('proyecto')
             ->select('id')
             ->where('id_equipo',Auth::user()->id_equip)
             ->latest()
-            ->first();
+            ->first();*/
     $task_count_total = DB::table('task')
-            ->where('id_proyecto',$proyecto->id)
-            ->where('estado','BackLog Revision')
-            ->orWhere('estado', 'BackLog Usuario')
-            ->orWhere('estado', 'BackLog Proyecto')
+            ->where([
+                ['id_proyecto', '=', $request->id_proyecto],
+                ['estado', '=', 'BackLog Proyecto'],
+            ])
             ->count();
     $task_count_terminado = DB::table('task')
-            ->where('id_proyecto',$proyecto->id)
-            ->where('estado','BackLog Aprobado')
+            ->where([
+                ['id_proyecto', '=', $request->id_proyecto],
+                ['estado', '=', 'BackLog Aprobado'],
+            ])
             ->count();
+    $task_count_proceso = DB::table('task')
+            ->where([
+                ['id_proyecto', '=', $request->id_proyecto],
+                ['estado', '=', 'BackLog Usuario'],
+            ])
+            ->orWhere([
+                ['id_proyecto', '=', $request->id_proyecto],
+                ['estado', '=', 'BackLog Revision'],
+            ])
+            ->count();
+    
+    
     
     //dd($monday);
     $array = array(
-        "task_count_terminado" => $task_count_total,
-        "task_count_total" => $task_count_terminado,
+        "task_count_terminado" => $task_count_terminado,
+        "task_count_total" => $task_count_total,
+        "task_count_proceso" => $task_count_proceso,
     );
     
     return $array;
@@ -355,6 +370,7 @@ Route::get('storage/{archivo}', function ($archivo) {
 
 Route::get('userfind', 'UsersController@find');
 Route::get('equipofind', 'EquipController@find');
+Route::get('proyectofind', 'ProyectoController@find');
 
 Route::get('obteneruser', 'Eloquent\ObjectResponseController@datauser');
 Route::get('obtenerequipo', 'Eloquent\ObjectResponseController@dataequipo');

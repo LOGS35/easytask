@@ -430,7 +430,7 @@ img {
     max-width: 100%;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .login {
         padding-top: 10em;
     }

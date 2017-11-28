@@ -24,7 +24,24 @@ class ProyectoController extends Controller
     {
         return view('modulos.proyecto.proyecto');
     }
+    public function find(Request $request)
+    {
+        $term = trim($request->q);
 
+        if (empty($term)) {
+            return \Response::json([]);
+        }
+
+        $proyecto = Proyecto::search($term)->limit(100)->get();
+
+        $formatted_tags = [];
+
+        foreach ($proyecto as $proyecto) {
+                $formatted_tags[] = ['id' => $proyecto->id, 'text' => $proyecto->name];
+        }
+
+        return \Response::json($formatted_tags);
+    }
     /**
      * Show the form for creating a new resource.
      *
